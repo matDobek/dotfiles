@@ -13,10 +13,6 @@ require("packer").startup(function(use)
   -- Treesitter
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 
-  -- TODO
-  -- [ ] Open links in nvim
-  -- [ ] Copy selected text, with Ctrl-Shift-c
-
   -- LSP Support
   use 'neovim/nvim-lspconfig'
   use 'williamboman/mason.nvim'
