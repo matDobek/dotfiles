@@ -1,0 +1,24 @@
+#--------------------
+# Debug
+#--------------------
+#
+# :display-panes - prefix q #=> show panes ID
+# :select-pane -t PANE_ID   #=> select target pane ID
+# :split-window -h -p 30    #=> split window horizontally/vertically with 30 percent pane size
+#
+
+#--------------------
+# dotfiles
+#--------------------
+
+new-window
+rename-window 'playground'
+send-keys 'j go_playground' C-m
+send-keys 'tmux--reorder' C-m
+send-keys 'vim main.go' C-m
+
+split-window -h
+send-keys 'j go_playground' C-m
+send-keys 'watch -n1 go run main.go' C-m
+
+select-pane -t 1

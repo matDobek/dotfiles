@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+amixer set Master unmute
+amixer -q sset Master 2%-
+
+amixer get Master | grep -Eo "[0-9]+%" | xargs -I% friday--notify "Volume: %" 1

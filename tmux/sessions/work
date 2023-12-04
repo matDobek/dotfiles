@@ -1,0 +1,82 @@
+#--------------------
+# Debug
+#--------------------
+#
+# :display-panes - prefix q #=> show panes ID
+# :select-pane -t PANE_ID   #=> select target pane ID
+# :split-window -h -p 30    #=> split window horizontally/vertically with 30 percent pane size
+#
+#
+
+#--------------------
+# dotfiles
+#--------------------
+
+new-window
+rename-window 'Monitoring'
+send-keys 'cd ~/fresha/system && clear' C-m
+send-keys 'xtop' C-m
+
+#--------------------
+# dev proc
+#--------------------
+
+new-window
+rename-window 'Processes'
+send-keys 'cd ~/fresha/system && clear' C-m
+send-keys 'docker-compose up -d db redis kafka' C-m
+
+split-window -h
+send-keys 'cd ~/fresha/system && clear' C-m
+
+split-window -v
+send-keys 'cd ~/fresha/system && clear' C-m
+
+select-pane -t 0
+split-window -v
+send-keys 'cd ~/fresha/system && clear' C-m
+send-keys 'sshuttle--integration' C-m
+
+select-pane -t 2
+
+#--------------------
+# Files
+#--------------------
+
+new-window
+rename-window 'dev_root'
+send-keys 'cd ~/fresha/system && clear' C-m
+send-keys 'git status' C-m
+
+new-window
+rename-window 'umbrella'
+send-keys 'cd ~/fresha/system/apps/shedul-umbrella && clear' C-m
+
+new-window
+rename-window 'platform_core'
+send-keys 'cd ~/fresha/system/apps/shedul-umbrella/apps/platform && clear' C-m
+send-keys 'vim' C-m
+
+new-window
+rename-window 'platform_web'
+send-keys 'cd ~/fresha/system/apps/shedul-umbrella/apps/shedul_web && clear' C-m
+send-keys 'vim' C-m
+
+new-window
+rename-window 'fresha_core'
+send-keys 'cd ~/fresha/system/apps/shedul-umbrella/apps/fresha && clear' C-m
+send-keys 'vim' C-m
+
+new-window
+rename-window 'fresha_web'
+send-keys 'cd ~/fresha/system/apps/shedul-umbrella/apps/fresha_web && clear' C-m
+send-keys 'vim' C-m
+
+new-window
+rename-window 'shedul'
+send-keys 'cd ~/fresha/system/apps/shedul && clear' C-m
+send-keys 'vim' C-m
+
+new-window
+send-keys 'tmux--reorder' C-m
+#move-window -r

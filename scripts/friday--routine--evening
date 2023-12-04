@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+uid=$(id -u)
+if (( uid != 0 )); then
+  echo "This script requires root privileges."
+  exit
+fi
+
+sudo -u cr0xd friday--mode--chill
+sudo -u root friday--backup
+sudo -u root friday--suspend-untill-tomorrow
+sudo -u cr0xd friday--routine--morning

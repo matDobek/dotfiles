@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+
+wake_up_time='6:30'
+
+#
+# Solved Issues
+#
+#   Network is unreachable after using `rtcwake` command.
+#	    It works fine when using `suspend` or `reboot`.
+#
+# First I've checked the
+# 	sudo systemctl status NetworkManager.service
+# Which gave me:
+# 	... <warn>  [1601751029.4468] device (enp2s0): fail>
+# Upon checking `dmesg | grep enp2s0` I've recived failing module:
+# 	r8169 0000:02:00.0 enp2s0: Link is Down
+# `lsmod | grep r8169`
+#
+# Solution:
+#   shutdown r8169 mod, before suspending
+#   start r8169 mod, upon resuming work
+#
+
+function decho() {
+  echo "---------------"
+  echo $1
+  echo "---------------"
+}
+
+function wake_up_date_in_sec() {
+  local wake_up_h=$(echo $wake_up_time | cut -d':' -f1 )
+  local wake_up_min=$(echo $wake_up_time | cut -d':' -f2 )
+  local current_h=$(date +"%H:%M" | cut -d':' -f1 )
+  local current_min=$(date +"%H:%M" | cut -d':' -f2 )
+
+  local result=""
+
+  if (( current_h < wake_up_h )); then
+    result=$(date +%s -d "today $wake_up_time")
+  else
+    result=$(date +%s -d "tomorrow $wake_up_time")
+  fi
+
+  # Debug
+  #decho "Set date to $( date --date="@$result" )"
+
+  echo $result
+}
+
+function suspend_machine() {
+  sudo systemctl stop dhcpcd.service
+  sudo systemctl stop NetworkManager.service
+  sudo modprobe -rf r8169
+
+  #sudo rtcwake -m disk -s 30
+  sudo rtcwake -m disk -l -t $(wake_up_date_in_sec)
+
+  sudo modprobe r8169
+  sudo systemctl restart NetworkManager.service
+  sudo systemctl restart dhcpcd.service
+
+  sleep 5
+  sudo systemctl --no-pager status dhcpcd.service
+  sudo systemctl --no-pager status NetworkManager.service
+}
+
+suspend_machine

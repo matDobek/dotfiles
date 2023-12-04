@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+
+home_dir=/home/cr0xd
+mount_point=/media/usb
+mount_device=/dev/disk/by-label/KINGSTON
+backup_src=$home_dir/main
+backup_dest=${mount_point}/main
+
+echo "Backup to USB drive"
+echo "===================="
+echo ""
+
+# Check if root
+uid=$(id -u)
+if (( uid != 0 )); then
+  echo "Skipping - This script requires root privileges."
+  exit
+fi
+
+# Check if USB is present
+if [[ ! -e $mount_device ]]; then
+  echo "----------"
+  echo "Skipping - $mount_device not present."
+  echo "----------"
+  exit
+fi
+
+sudo mount $mount_device $mount_point
+
+echo
+echo "Creating archive at $home_dir/main_backup.tar.gz ..."
+tar cf - ${backup_src} -P \
+  | pv -s $(du -sb ${backup_src} | awk '{print $1}') \
+  | gzip > $home_dir/main_backup.tar.gz
+
+echo
+echo "Cleaning old backup ..."
+time sudo rm -rf ${backup_dest}
+
+echo
+echo "Directory content:"
+ls ${mount_point}
+
+echo
+echo "Creating backup ..."
+time sudo cp -r $backup_src $backup_dest
+
+echo
+echo "Directory content:"
+ls ${mount_point}
+
+sudo umount $mount_point

@@ -1,0 +1,230 @@
+$color-black: #19171C;
+$color-white: #F0ECF9;
+
+//$color-background: #272020;
+//$color-background-2: #544545;
+//$color-secondary-1: #D59C90;
+//$color-secondary-2: #604039;
+//$color-primary: #AC6253;
+
+//$color-red: #F906F9;
+//$color-green: #A8F906;
+//$color-blue: #06F9F9;
+
+//$color-background: #633636;
+//$color-background-2: #AF6A6A;
+//$color-secondary-1: #E59A9A;
+//$color-secondary-2: #F5D6D6;
+//$color-primary: #F7EBD4;
+
+//$color-background-bar: #633636;
+$color-background-bar: #121212;
+$color-background: #ef9eac;
+$color-background-2: #633636;
+$color-primary: #F2E0C0;
+
+$color-red: #C98282;
+$color-green: #A6C982;
+$color-blue: #82B2C9;
+//$color-background-bar: #cee6fe;
+
+// $color-primary-1
+// $color-primary-2
+// $color-secondary-1
+// $color-secondary-2
+
+* {
+  all: unset;
+  //font-family: feather;
+  //font-family: DaddyTimeMono NF;
+}
+
+// --------------------
+// --- common
+// --------------------
+
+.tile {
+  background-color: $color-background;
+  padding: 20px 20px;
+  border: 5px solid;
+  border-color: $color-background-2;
+  border-radius: 10px;
+}
+
+
+// --------------------
+
+* {
+  all: unset;
+  //font-family: feather;
+  //font-family: DaddyTimeMono NF;
+}
+
+// --------------------
+// --- common
+// --------------------
+
+.tile {
+  background-color: $color-background;
+  padding: 20px 20px;
+  border: 5px solid;
+  border-color: $color-background-2;
+  border-radius: 10px;
+}
+
+
+// --------------------
+// --- control-center
+// --------------------
+
+.control-center {
+  font-size: 35px;
+
+  .btn {
+    color: $color-background-2;
+    //background: $color-background-2;
+    //border: 5px solid;
+    //border-color: $color-background-2;
+    margin: 0 5px;
+  }
+
+  .clock {
+    font-size: 1.3em;
+
+    .primary {
+      color: $color-background-2;
+    }
+
+    .secondary {
+      color: $color-primary;
+    }
+  }
+
+  .calendar {
+    .primary {
+      color: $color-background-2;
+    }
+
+    .secondary {
+      font-size: 0.7em;
+      color: $color-primary;
+    }
+  }
+
+  .metric-graph {
+    label {
+      font-size: 0.7em;
+      color: $color-background-2;
+    }
+
+    circular-progress {
+      background-color: $color-background-2;
+      color: $color-primary;
+
+      label {
+        font-size: 1.2em;
+        color: $color-background-2;
+      }
+    }
+  }
+
+  .avatar {
+    background-image: url("/home/cr0xd/main/personal/images/avatars/avatar.png");
+    //background-repeat: no-repeat;
+    //min-width: 150px;
+    min-height: 200px;
+    background-size: 110%;
+    background-position: 30%;
+    border-radius: 100px;
+  }
+}
+
+// --------------------
+// --- control-center
+// --------------------
+
+.notification-center {
+  font-size: 35px;
+  color: $color-background-2;
+}
+
+.notification {
+  font-size: 35px;
+  color: $color-background-2;
+
+  background-color: $color-background;
+  border: 2px solid;
+  border-color: $color-background-2;
+  border-radius: 10px;
+
+  .notification-icon {
+    border-right: 2px solid;
+    border-color: $color-background-2;
+    font-size: 0.7em;
+    min-width: 50px;
+    color: $color-background-2;
+  }
+
+  .notification-time {
+    font-size: 0.35em;
+    min-width: 30px;
+    color: $color-background-2;
+    margin: 10px 10px 0 0;
+  }
+
+  .notification-btn {
+    font-size: 0.7em;
+    min-width: 30px;
+    color: $color-background-2;
+    margin: 0 10px 0 0;
+  }
+
+  .notification-header {
+    font-size: 0.40em;
+    color: $color-primary;
+    margin: 10px 10px 0px 10px;
+    min-width: 250px;
+  }
+
+  .notification-body {
+    font-size: 0.40em;
+    color: $color-background-2;
+    margin: 10px 10px;
+  }
+}
+
+// --------------------
+// --- dock
+// --------------------
+
+.dock {
+  padding: 5px 20px;
+  background-color: $color-background-bar;
+
+  .workspaces {
+    .active {
+      color: $color-primary;
+    }
+
+    .inactive {
+      color: $color-background-2;
+    }
+  }
+}
+
+//.metric scale trough highlight {
+  //color: #000000;
+  //background: linear-gradient(90deg, #88c0d0 0%, #81a1c1  50%, #5E81ac 100%);
+//}
+//.metric scale trough {
+  //background-color: #545454;
+  //min-height: 10px;
+  //min-width: 50px;
+  //margin-left: 10px;
+  //margin-right: 5px;
+//}
+
+//.metric .label {
+  //color: #B48EAD;
+  //font-size: 1.5rem;
+//}

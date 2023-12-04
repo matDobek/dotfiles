@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+
+# script for running specs in similar manner as rspec
+# minitest - (without args) - will invoke all tests
+# minitest test/models/concerns/payable_test.rb - will invoke all payable_test
+# minitest test/models/concerns/payable_test.rb:13 - will invoke all tests inside context found in 13th line
+#
+# Unfortunately, right now, contex value has to be unique to make this work
+# so it won't work as expected if file contains 2 (or more) same contexts:
+# context 'not unique' do
+# ...
+# end
+#
+# context 'not unique' do
+# ...
+# end
+#
+
+function log() {
+  string=$1
+
+  echo "- - -"
+  echo $string
+  echo "- - -"
+}
+
+function run_all_tests() {
+  log "Running all tests ..."
+
+  bundle exec rake test
+}
+
+function run_file_tests() {
+  file=$1
+
+  log "Running tests for $file ..."
+
+  eval ruby -Itest "$file"
+}
+
+function run_specyfic_tests() {
+  file=$1
+  lineNumber=$2
+  name=$(sed "$lineNumber q;d" $file | grep -Eo "('.*'|\".*\")")
+
+  log "Running tests $name for $file ..."
+
+  eval ruby -Itest "$file" --name "/$name/"
+}
+
+function main() {
+  if [ -z "$1" ] ; then
+    run_all_tests
+    exit 0
+  fi
+
+  file=$( echo $1 | cut -d ":" -f 1 )
+  lineNumber=$( echo $1 | cut -d ":" -f 2 )
+
+  if [ "$file" == "$lineNumber" ] ; then
+    run_file_tests $file
+    exit 0
+  fi
+
+  run_specyfic_tests $file $lineNumber
+}
+
+main $1

@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+# This script shows an alert using dzen2
+
+FONT="-*-fira code retina-medium-*-*-*-16-*-*-*-*-*-*-*"
+WIDTH=300
+HEIGHT=50
+BACKGROUND="#feb601"
+FOREGROUND="#212121"
+
+#
+# Dispaly notification
+#
+
+screenWidth=$(xdpyinfo | grep 'dimensions' | egrep -o "[0-9]+x[0-9]+ pixels" | sed "s/x.*//")
+screenHeight=$(xdpyinfo | grep 'dimensions' | egrep -o "[0-9]+x[0-9]+ pixels" | egrep -o "x[0-9]*" | sed "s/x//")
+
+let "leftX= $screenWidth - $WIDTH"
+let "middleY = $screenHeight / 2 - ($HEIGHT/2)"
+let "middleX = $screenWidth / 2 - ($WIDTH/2)"
+
+echo $1 | dzen2 -fn "$FONT" -p $2 -h $HEIGHT -w $WIDTH -y $middleY -x $middleX -bg "$BACKGROUND" -fg "$FOREGROUND" &

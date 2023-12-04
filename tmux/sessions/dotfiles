@@ -1,0 +1,18 @@
+#--------------------
+# Debug
+#--------------------
+#
+# :display-panes - prefix q #=> show panes ID
+# :select-pane -t PANE_ID   #=> select target pane ID
+# :split-window -h -p 30    #=> split window horizontally/vertically with 30 percent pane size
+#
+
+#--------------------
+# dotfiles
+#--------------------
+
+new-window
+rename-window 'Dotfiles'
+send-keys 'j dotfiles' C-m
+send-keys 'tmux--reorder' C-m
+send-keys 'vim' C-m

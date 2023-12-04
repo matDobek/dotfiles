@@ -1,0 +1,81 @@
+font:
+  size: 12
+  normal:
+    family: Fira Code Nerd Font
+    style: Regular
+
+  bold:
+    family: Fira Code Nerd Font
+    style: Bold
+
+  italic:
+    family: Fira Code Nerd Font
+    style: Italic
+
+  bold_italic:
+    family: Fira Code
+    style: Bold Italic
+
+window:
+  padding:
+    x: 5
+    y: 5
+  opacity: 1
+
+# TamTam
+colors:
+  # Default colors
+  primary:
+    background:         '#050505'
+    foreground:         '#F2E0C0'
+    dim_foreground:     '#dbdbdb'
+    bright_foreground:  '#d9d9d9'
+    dim_background:     '#202020' # not sure
+    bright_background:  '#3a3a3a' # not sure
+
+  # Cursor colors
+  cursor:
+    text:   '#F0ECF9'
+    cursor: '#F0ECF9'
+
+  # Normal colors
+  normal:
+    #black:    '#19171C'
+    #white:    '#F0ECF9'
+    #cyan:     '#D59C90'
+    #magenta:  '#604039'
+    #yellow:   '#AC6253'
+    #red:      '#F906F9'
+    #green:    '#A8F906'
+    black:    '#121212'
+    white:    '#F0ECF9'
+    yellow:   '#F2E0C0'
+    magenta:  '#ef9eac'
+    cyan:     '#633636'
+    red:      '#C98282'
+    green:    '#A6C982'
+    blue:     '#cee6fe'
+
+  # Bright colors
+  bright:
+    black:    '#121212'
+    white:    '#F0ECF9'
+    yellow:   '#F2E0C0'
+    magenta:  '#ef9eac'
+    cyan:     '#633636'
+    red:      '#C98282'
+    green:    '#A6C982'
+    blue:     '#cee6fe'
+
+  # Dim colors
+  dim:
+    black:    '#121212'
+    white:    '#F0ECF9'
+    yellow:   '#F2E0C0'
+    magenta:  '#ef9eac'
+    cyan:     '#633636'
+    red:      '#C98282'
+    green:    '#A6C982'
+    blue:     '#cee6fe'
+
+theme: TamTam

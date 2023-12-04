@@ -1,0 +1,23 @@
+[user]
+	name = Mateusz Dobek
+	email = mat.dobek@gmail.com
+[github]
+  user = matdobek
+[core]
+  editor = nvim
+  excludesfile = ~/.gitignore
+[format]
+  pretty = %C(yellow)%h%Creset %s %C(red)(%an, %cr)%Creset
+[push]
+	default = current
+[credential]
+  helper = osxkeychain
+#[commit]
+  #gpgsign = true
+[url "https://github"]
+	insteadOf = git://github
+[filter "lfs"]
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+betterlockscreen -l --time-format "%H:%M"

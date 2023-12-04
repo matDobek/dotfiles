@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+#
+# works nice when combined with git pre-commit hook
+#
+
+function get_commited_files {
+  git diff --cached --name-status | awk '{ print $2 }'
+}
+
+function select_jpg {
+  grep -E "(.jpg|.jpeg)"
+}
+
+function select_png {
+  grep -E "(.png)"
+}
+
+function convert_jpeg {
+  while read file; do
+    # Keep better quality for main images, on large screens
+    # Lower quality on the rest
+    quality=85
+    main_image=$(echo $file | grep -E "title|mail|banner" | grep --invert-match -E "xs|sm|small|mobile")
+    if [[ -n $main_image ]]; then
+      quality=95
+    fi
+
+    orginal_size=$(ls -al $file | awk '{ print $5 }')
+
+    convert -sampling-factor 4:2:0 -strip -quality $quality -interlace Plane $file $file
+
+    new_size=$(ls -al $file | awk '{ print $5 }')
+
+    if [[ $new_size -gt $orginal_size ]]; then
+      git checkout $file
+    fi
+
+    new_size=$(ls -al $file | awk '{ print $5 }')
+    reduction=$(( 100 - (new_size * 100) / orginal_size ))
+
+    echo -e "Quality: $quality \t Reduction: $reduction % \t Orginal Size: $orginal_size \t New size: $new_size"
+    echo -e "File: \t\t $file"
+  done
+}
+
+function convert_png {
+  while read file; do
+    orginal_size=$(ls -al $file | awk '{ print $5 }')
+
+    convert -strip $file $file
+
+    new_size=$(ls -al $file | awk '{ print $5 }')
+
+    if [[ $new_size -gt $orginal_size ]]; then
+      git checkout $file
+    fi
+
+    new_size=$(ls -al $file | awk '{ print $5 }')
+    reduction=$(( 100 - (new_size * 100) / orginal_size ))
+
+    echo -e "Quality: - - - \t Reduction: $reduction % \t Orginal Size: $orginal_size \t New size: $new_size"
+    echo -e "File: \t\t $file"
+  done
+}
+
+
+# convert images
+get_commited_files | select_jpg | convert_jpeg
+get_commited_files | select_png | convert_png
+
+# git - stage the changes, so they will be stored within current commit
+get_commited_files | select_jpg | xargs git add
+get_commited_files | select_png | xargs git add
+
+exit 0

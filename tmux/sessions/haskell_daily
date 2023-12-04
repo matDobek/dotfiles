@@ -1,0 +1,46 @@
+#--------------------
+# dotfiles
+#--------------------
+
+new-window
+rename-window 'dotfiles/wiki'
+send-keys 'j dotfiles && vim' C-m
+
+split-window -h
+send-keys 'j wiki && vim' C-m
+
+
+#--------------------
+# dev proc
+#--------------------
+
+new-window
+rename-window 'dev_proc'
+send-keys 'j daily' C-m
+send-keys 'make shell' C-m
+send-keys 'clear' C-m
+
+
+#--------------------
+# dev files
+#--------------------
+
+new-window
+rename-window 'dev_files'
+send-keys 'j daily' C-m
+send-keys 'make shell' C-m
+send-keys 'clear' C-m
+send-keys 'vim' C-m
+
+
+#--------------------
+# dev add
+#--------------------
+
+new-window
+rename-window 'dev_additional'
+send-keys 'j daily' C-m
+send-keys 'make shell' C-m
+send-keys 'clear' C-m
+
+#move-window -r

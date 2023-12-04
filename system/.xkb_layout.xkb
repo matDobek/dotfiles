@@ -1,0 +1,18 @@
+xkb_keymap {
+	xkb_keycodes  { include "evdev+aliases(qwerty)"	};
+	xkb_geometry  { include "pc(pc104)"	};
+	xkb_types     { include "complete"	};
+	xkb_compat    { include "complete"	};
+
+	xkb_symbols {
+		include "pc"
+		include "pl"
+		include "inet(evdev)"
+
+		key <CAPS> { [ Escape ] };
+
+		// key <LALT> { [ Super_L, Super_L ] };
+		// key <LWIN> { [ ISO_Level3_Shift ] };
+		// modifier_map Mod4 { Super_L };
+	};
+};

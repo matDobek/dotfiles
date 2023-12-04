@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+tags() {
+  git tag --sort=version:refname
+}
+
+newest_tag() {
+  tags | tail -1
+}
+
+previous_tag() {
+  tags | tail -2 | head -1
+}
+
+commits_between_tags() {
+  git rev-list $(previous_tag)..$(newest_tag) --pretty
+}
+
+jira_tickets_ids_between_tags() {
+  commits_between_tags | grep -Eo "LEF-[0-9]+" | sort | uniq -i
+}
+
+print_deployed_tickets() {
+  jira_tickets_ids_between_tags | awk '{ print "https://netguru.atlassian.net/browse/"$0 }'
+}
+
+log() {
+  text=$1
+
+  red=`tput setaf 1`
+  green=`tput setaf 2`
+  reset=`tput sgr0`
+
+  main_color="${green}"
+
+  echo
+  echo
+  echo "${main_color}"
+  echo "=============================="
+  echo "$text"
+  echo "=============================="
+  echo "${reset}"
+}
+
+########################
+######## TAG ###########
+########################
+
+git tag | xargs git tag -d # delete local tags
+
+git checkout release
+git pull origin release --tags
+
+echo "Latest tag: $(newest_tag)"
+
+echo "Provide new tag:"
+read new_tag
+
+git tag $new_tag
+git push origin $new_tag
+
+########################
+##### PRODUCTION #######
+########################
+
+git push origin release:production
+
+########################
+#### MANUAL ACTIONS ####
+########################
+
+log "Deployed tickets"
+print_deployed_tickets
+echo "Number of tickets: $(print_deployed_tickets | wc -l)"
+
+log "Create new release"
+
+log "Perform all release tasks"
+cat ./RELEASE
+
+log "Check services"
+
+########################
+###### CLEAN UP ########
+########################
+
+git checkout master
+cat RELEASE_TEMPLATE > RELEASE
+git add RELEASE
+git commit -m "Clean up RELEASE file"
+git push origin master

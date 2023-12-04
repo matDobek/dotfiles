@@ -1,0 +1,60 @@
+#!/usr/bin/env bash
+
+playlist_uri='spotify:playlist:6JeJ3ANkQdnXgPViBd8SC0'
+pre_playlist_uri='spotify:album:5QF2O0b6JLowjVoQG4c3HH'
+(( pre_playlist_playtime_in_sec = 5 * 60 ))
+
+function decho() {
+  echo "---------------"
+  echo $1
+  echo "---------------"
+}
+
+function volume_set() {
+  local n=$1
+
+  amixer set Master unmute
+  amixer -q sset Master ${n}%
+}
+
+function volume_inc() {
+  amixer -q sset Master 5%+
+}
+
+function spotify_start() {
+  local no_of_procs=$(ps aux | grep spotify | grep -v grep | wc -l | awk '{print $1}')
+
+  if (( no_of_procs == 0 )); then
+    decho "Starting spotify ..."
+    spotify &
+    sleep 30                    # wait for Spotify to open before continuing
+  fi
+}
+
+function spotify_play() {
+  local playlist_uri=$1
+
+  dbus-send --type=method_call --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player.OpenUri string:${playlist_uri}
+}
+
+function music_start() {
+  (( chunks = 5 ))
+  (( chunk_time = pre_playlist_playtime_in_sec / chunks ))
+
+  spotify_start
+
+  decho "Starting pre playlist ..."
+  volume_set 20
+  spotify_play ${pre_playlist_uri}
+
+  while (( chunks-- > 0)); do
+    sleep $chunk_time
+    volume_inc
+  done
+
+  decho "Starting playlist ..."
+  volume_set 50
+  spotify_play ${playlist_uri}
+}
+
+music_start

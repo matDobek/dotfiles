@@ -1,0 +1,248 @@
+; Packages to update
+;     pacman -Qqu | wc -l
+
+
+; --------------------
+; --- Debugging
+; --------------------
+; eww inspector
+
+; --------------------
+; --- Variables
+; --------------------
+
+(defpoll time_poll :interval "1s" "date '+%H:%M'")
+(defpoll date_poll :interval "1m" "date '+%d %b'")
+
+(deflisten workspaces_listen "./modules/workspaces.sh")
+;(deflisten notifications_short_listen :initial '{"show": false, "content": ""}' "./modules/notifications_short.sh")
+
+; --------------------
+; --- Windows
+; --------------------
+
+(defwindow dock
+  :monitor 0
+  :windowtype "dock"
+  :geometry (geometry :x 0
+                      :y 0
+                      :width "100%"
+                      :height "40px"
+                      :anchor "top center")
+  :reserve (struts :distance "40px" :side "top")
+  (dock)
+)
+
+(defwindow control-center
+  :monitor 0
+  :geometry (geometry :x "75px"
+                      :y "110px"
+                      :width "300px"
+            )
+  (control-center)
+)
+
+
+(defwindow notification-center
+  :monitor 0
+  :geometry (geometry :x "75px"
+                      :y "700px"
+                      :width "470px"
+            )
+  (notification-center)
+)
+
+(defwindow notification
+  :monitor 0
+  :geometry (geometry :x "0px"
+                      :y "40px"
+                      :width "300px"
+                      :anchor "top right"
+            )
+  (notification
+    :id "ID"
+    :icon "O"
+    :title "title"
+    :content "content"
+    :time "time"
+   )
+)
+
+
+; --------------------
+; --- Helpers
+; --------------------
+
+(defwidget icon-module [icon ?class]
+  (box :class "${class} icon-module"
+       :orientation "h"
+       :halign "end"
+       :space-evenly false
+    (label :class "icon" :text "${icon}")
+    (box :class "text" :valign "center"
+      (children))))
+
+; --------------------
+; --- Widgets
+; --------------------
+
+(defwidget dock []
+  (centerbox :orientation "h"
+    ""
+    (workspaces)
+    ""
+  )
+)
+
+(defwidget workspaces []
+  (icon-module :class "workspaces" :icon "" (literal :content workspaces_listen)))
+
+(defwidget workspace [active] (box :class {active ? "active" : "inactive"} {active ? "" : ""}))
+
+;(defwidget date [] (icon-module :class "date" :icon "" (label :text date_poll)))
+;(defwidget time [] (icon-module :class "time" :icon "" (label :text time_poll)))
+
+;(defwidget notification-short-revealer []
+  ;(box :class "notification-short-revealer"
+       ;:orientation "h"
+       ;:space-evenly false
+    ;(revealer :reveal {notifications_short_listen.show} :transition "slideright"
+      ;(box (literal :valign "center" :content {notifications_listen.content})))
+  ;)
+;)
+
+;(defwidget notification-revealer []
+  ;(box :class "notification-revealer"
+       ;:orientation "h"
+       ;:space-evenly false
+    ;(revealer :reveal {notifications_listen.show} :transition "slideright"
+      ;(box (literal :valign "center" :content {notifications_listen.content})))
+  ;)
+;)
+
+(defwidget control-center []
+  (box :orientation "v" :space-evenly "false" :spacing 10
+    ; -- row --
+    ;(box :orientation "h" :space-evenly "true" :spacing 10
+      ;(avatar)
+    ;)
+
+    ; -- row --
+    (box :orientation "h" :space-evenly "true" :spacing 10
+      (cal)
+      (clock)
+    )
+
+    ; -- row --
+    (box :orientation "h" :space-evenly "true" :spacing 10
+      (metric-graph :label "cpu" :icon "󰻠" :value {EWW_CPU.avg})
+      (metric-graph :label "ram" :icon "" :value {EWW_RAM.used_mem_perc})
+      (metric-graph :label "disk" :icon "󰋊" :value {(EWW_DISK["/"].used / EWW_DISK["/"].total) * 100})
+    )
+
+    ; -- row --
+    (box :orientation "h" :space-evenly "true" :spacing 10
+      (file-discovery)
+    )
+
+    ; -- row --
+    (box :orientation "h" :space-evenly "true" :spacing 10
+      (powermenu)
+    )
+  )
+)
+
+(defwidget avatar []
+  (box :orientation "h" :class "tile" :space-evenly "true"
+    (box :class "avatar" "")
+  )
+)
+
+;(defwidget metric [label value]
+  ;(box :orientation "h" :class "metric" :space-evenly true
+    ;(box :class "label" :halign "end" label)
+    ;(scale :min 0 :max 101 :active false :value value)))
+
+(defwidget metric-graph [label icon value]
+  (box :orientation "v" :class "metric-graph tile" :space-evenly false :spacing 10
+    (box :class "label" :halign "start" label)
+    (circular-progress
+      :height 100
+      :width 100
+      :clockwise false
+      :thickness 10
+      :value value
+      (label :text icon)
+    )
+  )
+)
+
+(defwidget clock []
+  (box :orientation "h" :class "clock tile" :space-evenly true
+    (box :class "primary"   {clock-hh})
+    (box :class "secondary" {clock-mm})
+  )
+)
+
+(defpoll clock-time :interval "1s"  "date +'%H : %M'")
+(defpoll clock-hh :interval "1s"  "date +'%H'")
+(defpoll clock-mm :interval "1s"  "date +'%M'")
+
+(defwidget cal []
+      (box :orientation "v" :class "calendar tile" :space-evenly false
+        (box :class "primary"   {calendar-date})
+        (box :class "secondary" {calendar-day})))
+
+(defpoll calendar-date :interval "1m"  "date +'%d %B'")
+(defpoll calendar-day :interval "1m"  "date +'%A'")
+
+(defwidget file-discovery []
+  (box :orientation "h" :class "tile" :space-evenly "true"
+    (button :class "btn" :tooltip "home" :onrightclick "/home/cr0xd/main/friday/dotfiles/eww/modules/open_file_manager.sh ~" " ")
+    (button :class "btn" :tooltip "downloads" :onrightclick "/home/cr0xd/main/friday/dotfiles/eww/modules/open_file_manager.sh ~/Downloads" "")
+    (button :class "btn" :tooltip "dotfiles" :onrightclick "/home/cr0xd/main/friday/dotfiles/eww/modules/open_file_manager.sh ~/main/friday/dotfiles" "")
+   )
+)
+
+(defwidget powermenu []
+  (box :orientation "h" :class "tile" :space-evenly "true"
+    (button :class "btn" :tooltip "shutdown" :onrightclick "/home/cr0xd/main/friday/scripts/friday--audio--inc" "")
+    (button :class "btn" :tooltip "reboot" :onrightclick "/home/cr0xd/main/friday/scripts/friday--lock" "")
+    (button :class "btn" :tooltip "sleep" :onrightclick "/home/cr0xd/main/friday/scripts/friday--lock" "")
+    (button :class "btn" :tooltip "lock" :onrightclick "/home/cr0xd/main/friday/scripts/friday--lock" "")
+  )
+)
+
+
+
+(defwidget notification-center []
+  (box :orientation "v" :space-evenly "false" :spacing 10
+    (box :orientation "v" :class "tile" :space-evenly false :spacing 10
+      (box :orientation "h" :space-evenly true
+        (box "Notifications")
+        (button :class "btn" :tooltip "clear notifications" :halign "end" :onrightclick "/home/cr0xd/main/friday/dotfiles/eww/modules/friday--notifications.sh --delete-all" "")
+      )
+      (literal :content {notifications-poll})
+    )
+  )
+)
+
+(defwidget notification [id icon title content time]
+  (box :orientation "h" :space-evenly false :class "notification" :width 250 :hexpand false
+    (box :class "notification-icon" (label :text {icon}))
+    (box :orientation "v" :space-evenly false
+      (box :class "notification-header" (label :text {title}   :wrap true :limit-width 30 :halign "center"))
+      (box :class "notification-body"   (label :text {content} :wrap true :limit-width 35 :halign "center"))
+    )
+    (box :orientation "v" :space-evenly false
+      (box :class "notification-time" (label :text {time} :valign "start" :halign "center"))
+      (button :class "notification-btn"
+        :tooltip "clear"
+        :onrightclick "/home/cr0xd/main/friday/dotfiles/eww/modules/friday--notifications.sh --delete-one ${id}"
+        (label :text "x" :valign "start" :halign "center")
+      )
+    )
+  )
+)
+
+(defpoll notifications-poll :interval "1s" "/home/cr0xd/main/friday/dotfiles/eww/modules/friday--notifications.sh --notifications")

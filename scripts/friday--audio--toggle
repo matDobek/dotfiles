@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+current_state=$(amixer set Master toggle | grep -Eo "\[on\]")
+
+if [[ -z $current_state ]]; then
+  friday--notify "Volume: OFF" 1
+else
+  amixer get Master | grep -Eo "[0-9]+%" | xargs -I% friday--notify "Volume: %" 1
+fi
