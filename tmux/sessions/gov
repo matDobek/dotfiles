@@ -1,0 +1,70 @@
+#--------------------
+# Debug
+#--------------------
+#
+# :display-panes - prefix q #=> show panes ID
+# :select-pane -t PANE_ID   #=> select target pane ID
+# :split-window -h -p 30    #=> split window horizontally/vertically with 30 percent pane size
+#
+#
+
+#--------------------
+# dotfiles
+#--------------------
+
+new-window
+rename-window 'dot'
+send-keys 'j dot' C-m
+send-keys 'vim' C-m
+#split-window -h
+#select-pane -t 1
+
+#--------------------
+# inf
+#--------------------
+
+new-window
+rename-window 'inf'
+send-keys 'j gov' C-m
+split-window -h
+
+select-pane -t 1
+send-keys 'j gov' C-m
+send-keys 'cd frontend' C-m
+send-keys 'lcp --proxyUrl http://localhost:8080/' C-m
+
+select-pane -t 2
+send-keys 'j gov' C-m
+send-keys 'cd backend' C-m
+send-keys 'asdf exec air' C-m
+
+#--------------------
+# back
+#--------------------
+
+new-window
+rename-window 'back'
+send-keys 'j gov' C-m
+send-keys 'cd backend' C-m
+send-keys 'vim' C-m
+# split-window -h
+# select-pane -t 1
+
+#--------------------
+# front
+#--------------------
+
+new-window
+rename-window 'front'
+send-keys 'j gov' C-m
+send-keys 'cd frontend' C-m
+send-keys 'vim' C-m
+# split-window -h
+# select-pane -t 1
+
+#--------------------
+# cleanup
+#--------------------
+
+new-window
+send-keys 'tmux--reorder' C-m
