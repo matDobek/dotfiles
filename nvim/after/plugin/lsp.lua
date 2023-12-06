@@ -9,13 +9,14 @@ require("mason-lspconfig").setup {
     -- This plugin uses lspconfig server names, not mason ones
     -- ref: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
     --
-    "marksman", -- markdown
-    "lua_ls",
-    "ruby_ls",
-    "gopls",
-    "elixirls",
+    'marksman', -- markdown
+    'lua_ls',
+    'ruby_ls',
+    'gopls',
+    'elixirls',
     'tsserver',
     'rust_analyzer',
+    'svelte',
   },
 }
 
@@ -26,12 +27,13 @@ require("mason-lspconfig").setup {
 require'nvim-treesitter.configs'.setup {
   -- ref: https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
   ensure_installed = {
-    "html",
-    "javascript",
-    "lua",
-    "ruby",
-    "elixir",
-    "go"
+    'html',
+    'javascript',
+    'lua',
+    'ruby',
+    'elixir',
+    'go',
+    'svelte',
   },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -104,8 +106,22 @@ cmp.setup({
     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
-    -- ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    ['<Tab>'] = cmp.mapping.confirm({ select = true }),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ['Tab'] = cmp.mapping(function(fallback)
+      if ls.jumpable(1) then
+        ls.jump(1)
+      else
+        fallback()
+      end
+    end, {'i', 's'}),
+    ['S-Tab'] = cmp.mapping(function(fallback)
+      if ls.jumpable(-1) then
+        ls.jump(-1)
+      else
+        fallback()
+      end
+    end, {'i', 's'}),
+    -- ['<Tab>'] = cmp.mapping.confirm({ select = true }),
     -- ['<Tab>'] = nil,
     -- ['<S-Tab>'] = nil,
     -- ['<C-Space>'] = cmp.mapping.complete(),
@@ -211,5 +227,9 @@ require("lspconfig").ruby_ls.setup {
 }
 
 require("lspconfig").elixirls.setup {
+  capabilities = capabilities,
+}
+
+require("lspconfig").svelte.setup {
   capabilities = capabilities,
 }
