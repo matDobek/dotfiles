@@ -43,7 +43,8 @@ vim.keymap.set("n", "<leader>r", ":so<cr>")
 vim.keymap.set({"n", "v", "s"}, "<leader>y", [["+y]])
 
 -- close buffer
-vim.keymap.set("n", "<leader>q", ":bd<cr>")
+vim.keymap.set("n", "<leader>qq", ":bd <cr>")
+vim.keymap.set("n", "<leader>qw", ":bp|bd #<cr>")
 
 -- split buffer vertically
 vim.keymap.set("n", "<leader>v", ":vsplit<cr>")
