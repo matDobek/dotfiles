@@ -18,6 +18,25 @@ require("packer").startup(function(use)
   use 'williamboman/mason.nvim'
   use "williamboman/mason-lspconfig.nvim"
 
+  -- Testing
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "antoinemadec/FixCursorHold.nvim",
+      -- languages
+      "nvim-neotest/neotest-go",
+    }
+  }
+
+  -- Debugger
+  use 'mfussenegger/nvim-dap'
+  use 'jay-babu/mason-nvim-dap.nvim'
+  use 'leoluz/nvim-dap-go'
+  use 'rcarriga/nvim-dap-ui'
+  use 'theHamsta/nvim-dap-virtual-text'
+  use 'folke/neodev.nvim'
+
   -- Autocompletion
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
@@ -29,9 +48,6 @@ require("packer").startup(function(use)
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
   use 'rafamadriz/friendly-snippets'
-  -- use 'hrsh7th/cmp-vsnip'
-  -- use 'hrsh7th/vim-vsnip'
-  -- use 'hrsh7th/vim-vsnip-integ'
 
   use({ "nvim-tree/nvim-tree.lua", requires = { "nvim-tree/nvim-web-devicons" } })
   use {
@@ -40,14 +56,14 @@ require("packer").startup(function(use)
 	  requires = { {"nvim-lua/plenary.nvim"} }
   }
 
-  use 'jiangmiao/auto-pairs'
+  use "fatih/vim-go" -- TODO remove later
+  -- use 'jiangmiao/auto-pairs'
   use "godlygeek/tabular"
   use "terrortylor/nvim-comment"
-  use "airblade/vim-gitgutter"
+  -- use "airblade/vim-gitgutter"
   use "mg979/vim-visual-multi"
   use "ggandor/leap.nvim"
-
-  use "fatih/vim-go"
+  use 'simrat39/symbols-outline.nvim'
 
   -- ai stuff
   use {
