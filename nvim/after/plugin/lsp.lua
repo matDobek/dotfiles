@@ -11,11 +11,13 @@ require("mason-lspconfig").setup {
     --
     'marksman', -- markdown
     'lua_ls',
+    'sqlls',
+
     'ruby_ls',
-    'gopls',
     'elixirls',
+    'gopls',
+
     'tsserver',
-    'rust_analyzer',
     'svelte',
   },
 }
@@ -114,13 +116,15 @@ end)
 require'nvim-treesitter.configs'.setup {
   -- ref: https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
   ensure_installed = {
+    'sql',
     'html',
     'javascript',
+    'typescript',
+    'svelte',
     'lua',
     'ruby',
     'elixir',
     'go',
-    'svelte',
   },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -301,22 +305,12 @@ require("lspconfig").lua_ls.setup {
   }
 }
 
-require("lspconfig").marksman.setup {
-  capabilities = capabilities,
-}
+require("lspconfig").marksman.setup { capabilities = capabilities }
+require("lspconfig").sqlls.setup { capabilities = capabilities }
 
-require("lspconfig").gopls.setup {
-  capabilities = capabilities,
-}
+require("lspconfig").ruby_ls.setup { capabilities = capabilities }
+require("lspconfig").elixirls.setup { capabilities = capabilities }
+require("lspconfig").gopls.setup { capabilities = capabilities }
 
-require("lspconfig").ruby_ls.setup {
-  capabilities = capabilities,
-}
-
-require("lspconfig").elixirls.setup {
-  capabilities = capabilities,
-}
-
-require("lspconfig").svelte.setup {
-  capabilities = capabilities,
-}
+require'lspconfig'.tsserver.setup{ capabilities = capabilities }
+require("lspconfig").svelte.setup { capabilities = capabilities }

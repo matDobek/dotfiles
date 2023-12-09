@@ -56,7 +56,7 @@ require("packer").startup(function(use)
 	  requires = { {"nvim-lua/plenary.nvim"} }
   }
 
-  use "fatih/vim-go" -- TODO remove later
+  -- use "fatih/vim-go" -- TODO remove later
   -- use 'jiangmiao/auto-pairs'
   use "godlygeek/tabular"
   use "terrortylor/nvim-comment"
@@ -64,6 +64,16 @@ require("packer").startup(function(use)
   use "mg979/vim-visual-multi"
   use "ggandor/leap.nvim"
   use 'simrat39/symbols-outline.nvim'
+  use {
+    "olexsmir/gopher.nvim",
+    requires = { -- dependencies
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+    },
+  }
+
+  use 'nvimdev/guard.nvim'
+  use 'nvimdev/guard-collection'
 
   -- ai stuff
   use {
