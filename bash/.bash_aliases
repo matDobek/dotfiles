@@ -8,6 +8,7 @@ alias open='xdg-open'
 alias ssh--login='eval $(ssh-agent -s) && ssh-add ~/.ssh/id_ed25519'
 alias friday--camera-setup='sudo modprobe v4l2loopback'
 alias friday--camera='gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 /dev/video0'
+alias timestamp='date +%s'
 
 # --------------------
 # OS Specific :: MacOS
