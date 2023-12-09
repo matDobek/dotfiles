@@ -280,3 +280,5 @@ sudo pacman -S git-lfs
 
 
 sudo pacman -S --noconfirm kitty
+sudo pacman -S --noconfirm pgcli # psql with syntax highlight
+paru -S --noconfirm logseq-desktop
