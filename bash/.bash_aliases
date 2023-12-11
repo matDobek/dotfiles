@@ -67,7 +67,9 @@ alias umount--usb='umount /media/usb'
 alias c='xclip -selection clipboard'
 alias v='xclip -o -selection clipboard'
 
-alias arr='youtube-dl --extract-audio --audio-format mp3 '
+alias arr='yt-dlp --extract-audio --audio-format mp3'
+alias friday--sound--clap='( cvlc --play-and-exit --no-one-instance /home/cr0xd/main/friday/dotfiles/sounds/clap.mp3 > /dev/null 2>&1 & )'
+alias friday--sound--gta='( cvlc --play-and-exit --no-one-instance /home/cr0xd/main/friday/dotfiles/sounds/gta_vc_mission_passed.mp3 > /dev/null 2>&1 & )'
 
 alias nice--json='python -m json.tool'
 
@@ -118,6 +120,7 @@ alias bu="bundle update"
 # --------------------
 # Elixir
 # --------------------
+
 alias e--format='mix format'
 alias e--check-format='mix format --check-formatted --dry-run'
 alias e--check-credo='mix credo --strict'
@@ -139,8 +142,9 @@ alias gcof='git checkout $(git branch | fzf)'
 alias gd='git diff'
 alias gdc='git diff --cached'
 alias gs='git status'
-#alias gpp='git pull --rebase; git push'
-alias gpp='git pull; git push'
+# alias gpp='git pull --rebase; git push'
+# alias gpp='git pull; git push'
+alias gpp='friday--sound--gta; git pull --rebase; git push'
 alias gppc='git pull; git push; ctags -R --languages=Rust,ruby --exclude=.git --exclude=log .'
 
 alias gpr='open "https://github.com/matDobek/`basename $(git rev-parse --show-toplevel)`/compare/master...`git rev-parse --abbrev-ref HEAD`?expand=1"'
