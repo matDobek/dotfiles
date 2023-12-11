@@ -282,3 +282,7 @@ sudo pacman -S git-lfs
 sudo pacman -S --noconfirm kitty
 sudo pacman -S --noconfirm pgcli # psql with syntax highlight
 paru -S --noconfirm logseq-desktop
+
+sudo pacman -S wireshark-qt
+paru -S --noconfirm yt-dlp
+paru -S vlc # for cvlc (playing sounds)
