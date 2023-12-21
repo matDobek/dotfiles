@@ -1,4 +1,6 @@
-vim.cmd.colorscheme("tokyonight-night")
+-- vim.cmd.colorscheme("tokyonight-night")
+-- set t_Co=256 " enable colors in terminal
+vim.cmd.colorscheme("photon")
 
 -- vim.cmd.colorscheme("rose-pine")
 -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
