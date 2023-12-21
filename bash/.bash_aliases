@@ -33,6 +33,7 @@ alias reload--x='xrdb ~/.Xresources'
 alias top='top -o cpu'
 alias topx='bashtop'
 alias vim='nvim'
+alias hx='helix'
 alias gpg='LANG=en gpg'
 
 # for human format use -h, instead of -m
