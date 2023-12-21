@@ -127,9 +127,14 @@ export PATH=$PATH
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
 # --------------------
-# Erlang flags
+# Erlang
 # --------------------
 export ERL_AFLAGS="-kernel shell_history enabled"
+
+# --------------------
+# Rust
+# --------------------
+source "$(asdf where rust)/env"
 
 # --------------------
 # OS Specyfic :: Mac
@@ -147,8 +152,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 
 # autojump
 # source "$(nix-store --query --references "$(which autojump)" | grep autojump)/share/autojump/autojump.bash"
-#. "$HOME/.cargo/env"
-
+#
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/cr0xd/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
