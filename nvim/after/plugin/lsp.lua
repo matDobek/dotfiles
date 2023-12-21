@@ -16,6 +16,7 @@ require("mason-lspconfig").setup {
     'ruby_ls',
     'elixirls',
     'gopls',
+    'rust_analyzer',
 
     'tsserver',
     'svelte',
@@ -125,6 +126,7 @@ require'nvim-treesitter.configs'.setup {
     'ruby',
     'elixir',
     'go',
+    'rust',
   },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -248,6 +250,19 @@ cmp.setup({
     completion = cmp.config.window.bordered(),
     documentation = cmp.config.window.bordered(),
   },
+  formatting = {
+    fields = { "abbr", "kind" },
+    format = function(entry, vim_item)
+      vim_item.abbr = vim_item.abbr:match("[^(]+")
+      -- vim_item.kind = ""
+
+      -- it appears that there is still space reserved for `menu`
+      -- despite it being not present in the fields
+      vim_item.menu = ""
+
+      return vim_item
+    end
+  },
 })
 
 --
@@ -311,6 +326,7 @@ require("lspconfig").sqlls.setup { capabilities = capabilities }
 require("lspconfig").ruby_ls.setup { capabilities = capabilities }
 require("lspconfig").elixirls.setup { capabilities = capabilities }
 require("lspconfig").gopls.setup { capabilities = capabilities }
+require("lspconfig").rust_analyzer.setup { capabilities = capabilities }
 
 require'lspconfig'.tsserver.setup{ capabilities = capabilities }
 require("lspconfig").svelte.setup { capabilities = capabilities }
