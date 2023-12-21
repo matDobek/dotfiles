@@ -43,7 +43,7 @@ send-keys 'npm run dev' C-m
 select-pane -t 3
 send-keys 'j gov' C-m
 send-keys 'cd backend' C-m
-send-keys 'asdf exec air' C-m
+# send-keys 'asdf exec air' C-m
 
 #--------------------
 # back
