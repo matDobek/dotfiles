@@ -22,7 +22,6 @@ require("packer").startup(function(use)
   use {
     "nvim-neotest/neotest",
     requires = {
-      "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
       -- languages
       "nvim-neotest/neotest-go",
@@ -50,13 +49,7 @@ require("packer").startup(function(use)
   use 'rafamadriz/friendly-snippets'
 
   use({ "nvim-tree/nvim-tree.lua", requires = { "nvim-tree/nvim-web-devicons" } })
-  use {
-	  "nvim-telescope/telescope.nvim", tag = "0.1.4",
-	  -- or                            , branch = "0.1.x",
-	  requires = { {"nvim-lua/plenary.nvim"} }
-  }
 
-  -- use "fatih/vim-go" -- TODO remove later
   -- use 'jiangmiao/auto-pairs'
   use "godlygeek/tabular"
   use "terrortylor/nvim-comment"
@@ -64,14 +57,17 @@ require("packer").startup(function(use)
   use "mg979/vim-visual-multi"
   use "ggandor/leap.nvim"
   use 'simrat39/symbols-outline.nvim'
-  use {
-    "olexsmir/gopher.nvim",
-    requires = { -- dependencies
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-  }
+  use 'nvim-telescope/telescope.nvim'
+  use 'nvim-lua/plenary.nvim' -- used by so many plugins, decided to pull it out for clarity
 
+  -- use "fatih/vim-go" -- TODO remove later
+  -- use {
+  --   "olexsmir/gopher.nvim",
+  --   requires = { -- dependencies
+  --     "nvim-treesitter/nvim-treesitter",
+  --   },
+  -- }
+  --
   use 'nvimdev/guard.nvim'
   use 'nvimdev/guard-collection'
 
@@ -79,7 +75,6 @@ require("packer").startup(function(use)
   use {
     "Exafunction/codeium.nvim",
     requires = {
-      "nvim-lua/plenary.nvim",
       "hrsh7th/nvim-cmp",
     }
   }
@@ -91,15 +86,13 @@ require("packer").startup(function(use)
     end,
     requires = {
       "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim"
     }
   })
 
   -- use("github/copilot.vim")
   -- use("aduros/ai.vim")
   -- use("nvim-lualine/lualine.nvim")
-  -- use("folke/zen-mode.nvim")
+  use("folke/zen-mode.nvim")
 
   -- themes
   use("cideM/yui")
@@ -110,5 +103,8 @@ require("packer").startup(function(use)
   use "rebelot/kanagawa.nvim"
   use "NLKNguyen/papercolor-theme"
   use { "ellisonleao/gruvbox.nvim" }
+  use 'aditya-azad/candle-grey'
+  use 'axvr/photon.vim'
+  use 'hardselius/warlock'
 
 end)
