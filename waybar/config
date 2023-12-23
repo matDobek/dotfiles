@@ -1,0 +1,112 @@
+{
+  "layer": "top",
+    "position": "top",
+    "margin-bottom": 0,
+    "modules-left": [
+      "clock",
+      "custom/updates",
+      "tray",
+    ],
+    "modules-center": [
+      "hyprland/workspaces",
+    ],
+    "modules-right": [
+      "network",
+      "temperature",
+      "disk",
+      "memory",
+      "cpu",
+      "pulseaudio",
+      "custom/powermenu",
+    ],
+
+    //==============================
+    // LEFT
+    //==============================
+
+    "tray": {
+      "icon-size": 24,
+      "spacing": 10,
+      "show-passive-items": true,
+    },
+
+    "custom/updates": {
+      "format": "<span color=\"#61afef\"></span> {}",
+      "tooltip": false,
+      "interval": 60,
+      "exec": "checkupdates | wc -l",
+    },
+
+    //==============================
+    // MIDDLE
+    //==============================
+
+    "hyprland/workspaces": {
+      "persistent-workspaces": {
+        "1": [],
+        "2": [],
+        "3": [],
+        "4": [],
+        "5": [],
+      },
+      "format": "{icon}",
+      "format-icons": {
+        "-99": "",
+        "active": "",
+        "default": ""
+      }
+    },
+
+    //==============================
+    // RIGHT
+    //==============================
+
+    "network": {
+      "interface": "enp3s0",
+      "tooltip-format-ethernet": "{ifname} ",
+      "interval": 2,
+      "format": " {bandwidthDownBits}  {bandwidthUpBits}",
+    },
+    "temperature": {
+      "format": "{icon} {temperatureC}°C",
+      "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+      "critical-threshold": 80,
+      "format-icons": ["", "", ""]
+    },
+    "memory": {
+      "format": " {}%",
+      "tooltip": "true"
+    },
+    "cpu": {
+      "format": " {usage}%",
+      "tooltip": "true"
+    },
+    "custom/powermenu": {
+      "format": "",
+      "tooltip": false,
+      "on-click": "exec shutdown now",
+    },
+    "pulseaudio": {
+      "format": "{volume}% {icon}",
+      "format-bluetooth": "{volume}% {icon}",
+      "format-muted": "",
+      "format-icons": {
+          "headphone": "",
+          "hands-free": "",
+          "headset": "",
+          "phone": "",
+          "portable": "",
+          "car": "",
+          "default": ["", ""]
+      },
+      "scroll-step": 1,
+      "on-click": "pavucontrol"
+    },
+    "clock": {
+      //"format": "<span color=\"#56b6c2\"></span> {:%H:%M}",
+      "format": "{:%H:%M}",
+      "interval": 60,
+      "tooltip": true,
+      "tooltip-format": "{:%d %B %H:%M}"
+    }
+}
