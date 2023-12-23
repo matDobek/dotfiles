@@ -233,12 +233,6 @@ paru -S --noconfirm google-chrome
 # No sound
 sudo pacman -S --noconfirm alsa-utils
 
-# no notifications?
-# no border on top
-curl https://sh.rustup.rs -sSf | sh
-rustup toolchain install nightly
-paru -S --noconfirm eww-git
-
 
 # NVIDIA
 # Grep Card
@@ -286,3 +280,42 @@ paru -S --noconfirm logseq-desktop
 sudo pacman -S wireshark-qt
 paru -S --noconfirm yt-dlp
 paru -S vlc # for cvlc (playing sounds)
+
+sudo pacman -S helix
+sudo pacman -S fastfetch
+paru -S brave-bin
+paru -S ncdu # disk utility
+
+
+
+# no notifications?
+# no border on top
+curl https://sh.rustup.rs -sSf | sh
+rustup toolchain install nightly
+paru -S --noconfirm eww-git
+
+#
+# Hyperland wannabe
+#
+
+#TODO: remove nvidia
+# https://nouveau.freedesktop.org/CodeNames.html
+paru -S --noconfirm mesa # nouveau drivers (GeForce 1060 - NV130 family (NV136))
+
+sudo pacman -S --noconfirm hyprland
+
+sudo pacman -S --noconfirm wofi
+
+sudo pacman -S --noconfirm waybar # statusbar
+paru -S --noconfirm checkupdates-with-aur # for status bar
+
+sudo pacman -S --noconfirm pipewire # enable screenshare on Hyperland
+sudo pacman -S --noconfirm xdg-desktop-portal-hyprland
+sudo pacman -S --noconfirm xdg-desktop-portal-gtk # filepicker
+
+sudo pacman -S --noconfirm qt5-wayland # QT Wayland Support
+sudo pacman -S --noconfirm qt6-wayland # QT Wayland Support
+
+sudo pacman -S --noconfirm nnn
+sudo pacman -S --noconfirm gammastep
+sudo pacman -S --noconfirm swaybg # wallpaper
