@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
-redshift -P -O 1500 -g 0.8
+# redshift -P -O 1500 -g 0.8
+
+pkill gammastep
+gammastep -P -O 1500 -g 0.8
