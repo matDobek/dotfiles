@@ -1,56 +1,28 @@
-$color-black: #19171C;
+$color-black: #121212;
 $color-white: #F0ECF9;
 
-//$color-background: #272020;
-//$color-background-2: #544545;
-//$color-secondary-1: #D59C90;
-//$color-secondary-2: #604039;
-//$color-primary: #AC6253;
+//
+// Previous color palette: (rose)
+// $color-black: #121212;
+// $color-background: #ef9eac;
+// $color-secondary: #633636;
+// $color-primary: #F2E0C0;
+//
+// $color-red: #C98282;
+// $color-green: #A6C982;
+// $color-blue: #82B2C9;
+//
+//
 
-//$color-red: #F906F9;
-//$color-green: #A8F906;
-//$color-blue: #06F9F9;
-
-//$color-background: #633636;
-//$color-background-2: #AF6A6A;
-//$color-secondary-1: #E59A9A;
-//$color-secondary-2: #F5D6D6;
-//$color-primary: #F7EBD4;
-
-//$color-background-bar: #633636;
-$color-background-bar: #121212;
-$color-background: #ef9eac;
-$color-background-2: #633636;
-$color-primary: #F2E0C0;
-
-$color-red: #C98282;
-$color-green: #A6C982;
-$color-blue: #82B2C9;
-//$color-background-bar: #cee6fe;
-
-// $color-primary-1
-// $color-primary-2
-// $color-secondary-1
-// $color-secondary-2
+$color-primary:   #f2e0c0;
+$color-secondary: #633636;
+$color-tertiary:  #B07C7A;
 
 * {
   all: unset;
   //font-family: feather;
   //font-family: DaddyTimeMono NF;
 }
-
-// --------------------
-// --- common
-// --------------------
-
-.tile {
-  background-color: $color-background;
-  padding: 20px 20px;
-  border: 5px solid;
-  border-color: $color-background-2;
-  border-radius: 10px;
-}
-
 
 // --------------------
 
@@ -65,10 +37,10 @@ $color-blue: #82B2C9;
 // --------------------
 
 .tile {
-  background-color: $color-background;
+  background-color: $color-primary;
   padding: 20px 20px;
   border: 5px solid;
-  border-color: $color-background-2;
+  border-color: $color-secondary;
   border-radius: 10px;
 }
 
@@ -81,10 +53,10 @@ $color-blue: #82B2C9;
   font-size: 35px;
 
   .btn {
-    color: $color-background-2;
-    //background: $color-background-2;
+    color: $color-secondary;
+    //background: $color-secondary;
     //border: 5px solid;
-    //border-color: $color-background-2;
+    //border-color: $color-secondary;
     margin: 0 5px;
   }
 
@@ -92,38 +64,38 @@ $color-blue: #82B2C9;
     font-size: 1.3em;
 
     .primary {
-      color: $color-background-2;
+      color: $color-secondary;
     }
 
     .secondary {
-      color: $color-primary;
+      color: $color-tertiary;
     }
   }
 
   .calendar {
     .primary {
-      color: $color-background-2;
+      color: $color-secondary;
     }
 
     .secondary {
       font-size: 0.7em;
-      color: $color-primary;
+      color: $color-tertiary;
     }
   }
 
   .metric-graph {
     label {
       font-size: 0.7em;
-      color: $color-background-2;
+      color: $color-secondary;
     }
 
     circular-progress {
-      background-color: $color-background-2;
-      color: $color-primary;
+      background-color: $color-secondary;
+      color: $color-tertiary;
 
       label {
         font-size: 1.2em;
-        color: $color-background-2;
+        color: $color-secondary;
       }
     }
   }
@@ -151,65 +123,65 @@ $color-blue: #82B2C9;
 
 .utils {
   .icon {
-    color: $color-background-2;
+    color: $color-secondary;
   }
 
   .value {
-    color: $color-primary;
+    color: $color-tertiary;
     font-size: 0.75em;
   }
 }
 
 // --------------------
-// --- control-center
+// --- notification-center
 // --------------------
 
 .notification-center {
   font-size: 35px;
-  color: $color-background-2;
+  color: $color-secondary;
 }
 
 .notification {
   font-size: 35px;
-  color: $color-background-2;
+  color: $color-secondary;
 
-  background-color: $color-background;
+  background-color: $color-secondary;
   border: 2px solid;
-  border-color: $color-background-2;
+  border-color: $color-secondary;
   border-radius: 10px;
 
   .notification-icon {
     border-right: 2px solid;
-    border-color: $color-background-2;
+    border-color: $color-secondary;
     font-size: 0.7em;
     min-width: 50px;
-    color: $color-background-2;
+    color: $color-secondary;
   }
 
   .notification-time {
     font-size: 0.35em;
     min-width: 30px;
-    color: $color-background-2;
+    color: $color-secondary;
     margin: 10px 10px 0 0;
   }
 
   .notification-btn {
     font-size: 0.7em;
     min-width: 30px;
-    color: $color-background-2;
+    color: $color-secondary;
     margin: 0 10px 0 0;
   }
 
   .notification-header {
     font-size: 0.40em;
-    color: $color-primary;
+    color: $color-tertiary;
     margin: 10px 10px 0px 10px;
     min-width: 250px;
   }
 
   .notification-body {
     font-size: 0.40em;
-    color: $color-background-2;
+    color: $color-secondary;
     margin: 10px 10px;
   }
 }
@@ -220,22 +192,22 @@ $color-blue: #82B2C9;
 
 .dock {
   padding: 5px 20px;
-  background-color: $color-background-bar;
+  background-color: $color-black;
 
   .workspaces-start {
     font-size: 1.0em;
-    color: $color-background-2;
-    background-color: $color-background-bar;
+    color: $color-secondary;
+    background-color: $color-black;
   }
 
   .workspaces-end {
     font-size: 1.0em;
-    color: $color-background-2;
-    background-color: $color-background-bar;
+    color: $color-secondary;
+    background-color: $color-black;
   }
 
   .workspaces {
-    background-color: $color-background-2;
+    background-color: $color-secondary;
     padding: 0 10px;
 
     box {
