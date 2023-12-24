@@ -12,6 +12,7 @@ require("mason-lspconfig").setup {
     'marksman', -- markdown
     'lua_ls',
     'sqlls',
+    'bashls',
 
     'ruby_ls',
     'elixirls',
@@ -118,6 +119,7 @@ require'nvim-treesitter.configs'.setup {
   -- ref: https://github.com/nvim-treesitter/nvim-treesitter#supported-languages
   ensure_installed = {
     'sql',
+    'bash',
     'html',
     'javascript',
     'typescript',
@@ -316,6 +318,15 @@ require("lspconfig").lua_ls.setup {
   settings = {
     Lua = {
       diagnostics = { globals = {'vim'} } -- prevent "global 'vim' undefined" warning
+    }
+  }
+}
+
+require("lspconfig").bashls.setup {
+  capabilities = capabilities,
+  settings = {
+    bashIde = {
+      globPattern = "*@(.sh|.inc|.bash|.command)"
     }
   }
 }
