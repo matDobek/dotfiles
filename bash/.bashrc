@@ -6,21 +6,32 @@
 # Colors
 # --------------------
 
-COLOR_NO_COLOR="\[\e[0m\]"
-COLOR_RED="\[\e[31m\]"
-COLOR_GREEN="\[\e[32m\]"
-COLOR_YELLOW="\[\e[33m\]"
-COLOR_BLUE="\[\e[34m\]"
-COLOR_MAGENTA="\[\e[35m\]"
-COLOR_CYAN="\[\e[36m\]"
-COLOR_GREY="\[\e[37m\]"
+COLOR_FG_RESET="\033[39m"
+COLOR_BG_RESET="\033[49m"
 
-COLOR__PWD=${COLOR_MAGENTA}
-COLOR__PROMPT=${COLOR_MAGENTA}
-COLOR__GIT_BRANCH=${COLOR_GREEN}
-COLOR__GIT_DIRTY=${COLOR_RED}
-COLOR__AWS=${COLOR_BLUE}
-COLOR__NIX_SHELL=${COLOR_BLUE}
+COLOR_FG_BLACK="\033[30m"
+COLOR_BG_BLACK="\033[40m"
+
+COLOR_FG_RED="\033[31m"
+COLOR_BG_RED="\033[41m"
+
+COLOR_FG_GREEN="\033[32m"
+COLOR_BG_GREEN="\033[42m"
+
+COLOR_FG_YELLOW="\033[33m"
+COLOR_BG_YELLOW="\033[43m"
+
+COLOR_FG_BLUE="\033[34m"
+COLOR_BG_BLUE="\033[44m"
+
+COLOR_FG_MAGENTA="\033[35m"
+COLOR_BG_MAGENTA="\033[45m"
+
+COLOR_FG_CYAN="\033[36m"
+COLOR_BG_CYAN="\033[46m"
+
+COLOR_FG_GREY="\033[37m"
+COLOR_BG_GREY="\033[47m"
 
 # --------------------
 # Aliases && Secrets
@@ -54,8 +65,6 @@ complete -F _command .
 # Prompts
 # --------------------
 
-prompt_symbol="λ:"
-
 current_dir() {
   pwd | awk -F\/ '{print $(NF-1),$(NF)}' | sed 's/ /\//'
 }
@@ -66,8 +75,12 @@ nix_shell() {
   fi
 }
 
+git_repository() {
+  git status 1> /dev/null 2> /dev/null; echo $?
+}
+
 git_branch() {
-  git branch 2> /dev/null | grep "\*" | awk '{print " "$2""}'
+  git branch 2> /dev/null | grep "\*" | awk '{print " "$2""}'
 }
 
 git_dirty_flag() {
@@ -94,9 +107,33 @@ aws_time_left() {
 }
 
 prompt_func() {
-  prompt="\n${COLOR__PWD}$(current_dir) ${COLOR__AWS} $(aws_time_left) ${COLOR__NIX_SHELL} $(nix_shell) ${COLOR__GIT_BRANCH} $(git_branch) ${COLOR__GIT_DIRTY} $(git_dirty_flag)"
+  separator=$'\ue0c6 '
 
-  PS1="${prompt}\n${COLOR__PROMPT}${prompt_symbol} ${COLOR_NO_COLOR}"
+  prompt="\n"
+  prompt+="${COLOR_FG_BLACK}${COLOR_BG_CYAN}${separator}"
+  prompt+="${COLOR_FG_RESET}${COLOR_BG_CYAN}$(current_dir) "
+  prompt+="${COLOR_FG_CYAN}"
+
+  if (( $(git_repository) != 0)) ; then
+    : # no repo
+  elif [ "$(git_dirty_flag)" != "" ]; then
+    prompt+="${COLOR_BG_YELLOW}${separator}"
+    prompt+="${COLOR_FG_BLACK}${COLOR_BG_YELLOW} $(git_branch) "
+    prompt+="${COLOR_FG_YELLOW}"
+  else
+    prompt+="${COLOR_BG_GREEN}${separator}"
+    prompt+="${COLOR_FG_BLACK}${COLOR_BG_GREEN} $(git_branch) "
+    prompt+="${COLOR_FG_GREEN}"
+  fi
+
+  if [ "${AWS_SESSION_EXPIRATION}" != "" ]; then
+    prompt+="${COLOR__AWS} $(aws_time_left) "
+  fi
+
+  prompt+="${COLOR_BG_BLACK}${separator}"
+  prompt+="${COLOR_FG_RESET}${COLOR_BG_RESET}"
+
+  PS1=${prompt}
 }
 
 PROMPT_COMMAND=prompt_func
