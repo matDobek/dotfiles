@@ -108,7 +108,7 @@ aws_time_left() {
 
 prompt_func() {
   separator=$'\ue0c6 '
-  separator2=$'\ue0c5 '
+  separator2=$'\ue0c7 '
 
   prompt="\n"
   prompt+="${COLOR_BG_BLACK}${COLOR_FG_CYAN}${separator2}"
