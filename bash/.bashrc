@@ -75,7 +75,7 @@ nix_shell() {
   fi
 }
 
-git_repository() {
+is_git_repository() {
   git status 1> /dev/null 2> /dev/null; echo $?
 }
 
@@ -83,8 +83,8 @@ git_branch() {
   git branch 2> /dev/null | grep "\*" | awk '{print " "$2""}'
 }
 
-git_dirty_flag() {
-  git status 2> /dev/null | grep -c : | awk '{if ($1 > 0) print "[+-]"}'
+git_modified_files() {
+  git status 2> /dev/null | grep -c :
 }
 
 aws_time_left() {
@@ -108,29 +108,28 @@ aws_time_left() {
 
 prompt_func() {
   separator=$'\ue0c6 '
+  separator2=$'\ue0c5 '
 
   prompt="\n"
-  prompt+="${COLOR_FG_BLACK}${COLOR_BG_CYAN}${separator}"
-  prompt+="${COLOR_FG_RESET}${COLOR_BG_CYAN}$(current_dir) "
-  prompt+="${COLOR_FG_CYAN}"
+  prompt+="${COLOR_BG_BLACK}${COLOR_FG_CYAN}${separator2}"
+  prompt+="${COLOR_FG_RESET}${COLOR_BG_CYAN} $(current_dir) "
+  prompt+="${COLOR_FG_CYAN}${COLOR_BG_BLACK}${separator}"
 
-  if (( $(git_repository) != 0)) ; then
-    : # no repo
-  elif [ "$(git_dirty_flag)" != "" ]; then
-    prompt+="${COLOR_BG_YELLOW}${separator}"
-    prompt+="${COLOR_FG_BLACK}${COLOR_BG_YELLOW} $(git_branch) "
-    prompt+="${COLOR_FG_YELLOW}"
-  else
-    prompt+="${COLOR_BG_GREEN}${separator}"
-    prompt+="${COLOR_FG_BLACK}${COLOR_BG_GREEN} $(git_branch) "
-    prompt+="${COLOR_FG_GREEN}"
+  if (( $(is_git_repository) == 0)) ; then
+    prompt+="${COLOR_BG_BLACK}${COLOR_FG_CYAN}${separator2}"
+    prompt+="${COLOR_FG_RESET}${COLOR_BG_CYAN} $(git_branch) "
+
+    if (( $(git_modified_files) > 0 )); then
+      prompt+="${COLOR_FG_RESET}${COLOR_BG_CYAN}[*] "
+    fi
+
+    prompt+="${COLOR_FG_CYAN}${COLOR_BG_BLACK}${separator}"
   fi
 
   if [ "${AWS_SESSION_EXPIRATION}" != "" ]; then
     prompt+="${COLOR__AWS} $(aws_time_left) "
   fi
 
-  prompt+="${COLOR_BG_BLACK}${separator}"
   prompt+="${COLOR_FG_RESET}${COLOR_BG_RESET}"
 
   PS1=${prompt}
