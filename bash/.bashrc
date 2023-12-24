@@ -131,6 +131,7 @@ prompt_func() {
   fi
 
   prompt+="${COLOR_FG_RESET}${COLOR_BG_RESET}"
+  prompt+="\n> "
 
   PS1=${prompt}
 }
