@@ -28,7 +28,7 @@
   :geometry (geometry :x 0
                       :y 0
                       :width "100%"
-                      :height "40px"
+                      :height "20px"
                       :anchor "top center")
   ; :reserve (struts :distance "40px" :side "top") ; x11
   :exclusive true ; wayland
@@ -99,14 +99,19 @@
 )
 
 (defwidget workspaces []
-  (icon-module :class "workspaces" :icon "" (literal :content workspaces_listen)))
+  (centerbox :orientation "h"
+    (box :class "workspaces-start" :halign "start" " ")
+    (icon-module :class "workspaces" :icon "" (literal :content workspaces_listen))
+    (box :class "workspaces-end" :halign "end" " ")
+  )
+)
 
 ; 
 ; 
 ; 
 ; 
 ; 
-(defwidget workspace [active] (box :class {active ? "active" : "inactive"} {active ? "" : ""}))
+(defwidget workspace [active] (box :class {active ? "active" : "inactive"} {active ? "" : ""}))
 
 ;(defwidget date [] (icon-module :class "date" :icon "" (label :text date_poll)))
 ;(defwidget time [] (icon-module :class "time" :icon "" (label :text time_poll)))
@@ -132,7 +137,7 @@
 (defwidget control-center []
   (box :orientation "v" :space-evenly "false" :spacing 10
     ; -- row --
-    ;(box :orientation "h" :space-evenly "true" :spacing 10
+    ;(box :class "avatar-container" :orientation "h" :space-evenly "true"
       ;(avatar)
     ;)
 
@@ -151,13 +156,18 @@
 
     ; -- row --
     (box :orientation "h" :space-evenly "true" :spacing 10
-      (file-discovery)
+      (utils)
     )
 
     ; -- row --
-    (box :orientation "h" :space-evenly "true" :spacing 10
-      (powermenu)
-    )
+    ;(box :orientation "h" :space-evenly "true" :spacing 10
+      ;(file-discovery)
+    ;)
+
+    ; -- row --
+    ;(box :orientation "h" :space-evenly "true" :spacing 10
+      ;(powermenu)
+    ;)
   )
 )
 
@@ -204,6 +214,28 @@
 
 (defpoll calendar-date :interval "1m"  "date +'%d %B'")
 (defpoll calendar-day :interval "1m"  "date +'%A'")
+
+(defwidget utils []
+  (box :orientation "h" :class "tile utils" :space-evenly "true"
+    (box :class "misc-audio" :spacing 30
+      (box :class "icon" :halign "end" {misc-audio-symbol})
+      (box :class "value" :halign "start" {misc-audio-volume})
+    )
+    (box :class "misc-git-last-activity" :spacing 30
+      (box :class "icon" :halign "end" "")
+      (box :class "value" :halign "start" {misc-git-last-activity})
+    )
+    (box :class "misc-checkupdate" :spacing 30
+      (box :class "icon" :halign "end" "󰣇")
+      (box :class "value" :halign "start" {misc-system-packages})
+    )
+  )
+)
+
+(defpoll misc-system-packages :interval "10m" "checkupdates | wc -l")
+(defpoll misc-git-last-activity :interval "10m" "/home/cr0xd/main/friday/dotfiles/eww/modules/git_last_activity.sh")
+(defpoll misc-audio-symbol :interval "50ms" "/home/cr0xd/main/friday/dotfiles/eww/modules/audio-output-symbol.sh")
+(defpoll misc-audio-volume :interval "50ms" "amixer get Master | grep -o -E '[0-9]+%' | sort | tail -n1")
 
 (defwidget file-discovery []
   (box :orientation "h" :class "tile" :space-evenly "true"
