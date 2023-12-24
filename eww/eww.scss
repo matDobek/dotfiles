@@ -202,7 +202,12 @@ $color-blue: #82B2C9;
   background-color: $color-background-bar;
 
   .workspaces {
+    box {
+      margin: 0 5px;
+    }
+
     .active {
+      font-size: 1.5em;
       color: $color-primary;
     }
 

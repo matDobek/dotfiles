@@ -14,7 +14,8 @@
 (defpoll time_poll :interval "1s" "date '+%H:%M'")
 (defpoll date_poll :interval "1m" "date '+%d %b'")
 
-(deflisten workspaces_listen "./modules/workspaces.sh")
+;(deflisten workspaces_listen "./modules/workspaces_x11.sh")
+(defpoll workspaces_listen :interval "50ms" "/home/cr0xd/main/friday/dotfiles/eww/modules/workspaces_wayland.sh")
 ;(deflisten notifications_short_listen :initial '{"show": false, "content": ""}' "./modules/notifications_short.sh")
 
 ; --------------------
@@ -29,12 +30,14 @@
                       :width "100%"
                       :height "40px"
                       :anchor "top center")
-  :reserve (struts :distance "40px" :side "top")
+  ; :reserve (struts :distance "40px" :side "top") ; x11
+  :exclusive true ; wayland
   (dock)
 )
 
 (defwindow control-center
   :monitor 0
+  :stacking "bottom"
   :geometry (geometry :x "75px"
                       :y "110px"
                       :width "300px"
@@ -45,6 +48,7 @@
 
 (defwindow notification-center
   :monitor 0
+  :stacking "bottom"
   :geometry (geometry :x "75px"
                       :y "700px"
                       :width "470px"
@@ -97,7 +101,10 @@
 (defwidget workspaces []
   (icon-module :class "workspaces" :icon "" (literal :content workspaces_listen)))
 
-(defwidget workspace [active] (box :class {active ? "active" : "inactive"} {active ? "" : ""}))
+; 
+; 
+; 
+(defwidget workspace [active] (box :class {active ? "active" : "inactive"} {active ? "" : ""}))
 
 ;(defwidget date [] (icon-module :class "date" :icon "" (label :text date_poll)))
 ;(defwidget time [] (icon-module :class "time" :icon "" (label :text time_poll)))
@@ -136,7 +143,7 @@
     ; -- row --
     (box :orientation "h" :space-evenly "true" :spacing 10
       (metric-graph :label "cpu" :icon "󰻠" :value {EWW_CPU.avg})
-      (metric-graph :label "ram" :icon "" :value {EWW_RAM.used_mem_perc})
+      (metric-graph :label "ram" :icon "" :value {EWW_RAM.used_mem_perc})
       (metric-graph :label "disk" :icon "󰋊" :value {(EWW_DISK["/"].used / EWW_DISK["/"].total) * 100})
     )
 
