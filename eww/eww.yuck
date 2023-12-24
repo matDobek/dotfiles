@@ -104,7 +104,9 @@
 ; 
 ; 
 ; 
-(defwidget workspace [active] (box :class {active ? "active" : "inactive"} {active ? "" : ""}))
+; 
+; 
+(defwidget workspace [active] (box :class {active ? "active" : "inactive"} {active ? "" : ""}))
 
 ;(defwidget date [] (icon-module :class "date" :icon "" (label :text date_poll)))
 ;(defwidget time [] (icon-module :class "time" :icon "" (label :text time_poll)))
