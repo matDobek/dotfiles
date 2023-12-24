@@ -316,6 +316,14 @@ sudo pacman -S --noconfirm xdg-desktop-portal-gtk # filepicker
 sudo pacman -S --noconfirm qt5-wayland # QT Wayland Support
 sudo pacman -S --noconfirm qt6-wayland # QT Wayland Support
 
-sudo pacman -S --noconfirm nnn
+sudo pacman -S --noconfirm nnn # file manager
+
 sudo pacman -S --noconfirm gammastep
 sudo pacman -S --noconfirm swaybg # wallpaper
+sudo pacman -S --noconfirm mpvpaper # moving wallpaper
+
+paru -S --noconfirm eww-wayland
+
+# repository of multiple unicode fonts
+# cheet sheet: https://www.nerdfonts.com/cheat-sheet
+paru -S --noconfirm nerd-fonts-git
