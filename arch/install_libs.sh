@@ -327,3 +327,6 @@ paru -S --noconfirm eww-wayland
 # repository of multiple unicode fonts
 # cheet sheet: https://www.nerdfonts.com/cheat-sheet
 paru -S --noconfirm nerd-fonts-git
+
+
+sudo pacman -S --noconfirm socat
