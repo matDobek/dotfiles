@@ -75,6 +75,11 @@ alias friday--sound--gta='( cvlc --play-and-exit --no-one-instance /home/cr0xd/m
 alias nice--json='python -m json.tool'
 
 # --------------------
+# eww
+# --------------------
+ alias eww--reload='eww close-all && eww reload && eww open dock && eww open control-center'
+
+# --------------------
 # LaTeX
 # --------------------
 
