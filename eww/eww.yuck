@@ -15,7 +15,7 @@
 (defpoll date_poll :interval "1m" "date '+%d %b'")
 
 ;(deflisten workspaces_listen "./modules/workspaces_x11.sh")
-(defpoll workspaces_listen :interval "50ms" "/home/cr0xd/main/friday/dotfiles/eww/modules/workspaces_wayland.sh")
+(deflisten workspaces_listen "/home/cr0xd/main/friday/dotfiles/eww/modules/workspaces_wayland.sh")
 ;(deflisten notifications_short_listen :initial '{"show": false, "content": ""}' "./modules/notifications_short.sh")
 
 ; --------------------
@@ -111,7 +111,7 @@
 ; 
 ; 
 ; 
-(defwidget workspace [active] (box :class {active ? "active" : "inactive"} {active ? "" : ""}))
+(defwidget workspace [current active] (box :class {active ? "active" : "inactive"} {current ? "" : ""}))
 
 ;(defwidget date [] (icon-module :class "date" :icon "" (label :text date_poll)))
 ;(defwidget time [] (icon-module :class "time" :icon "" (label :text time_poll)))
@@ -234,8 +234,8 @@
 
 (defpoll misc-system-packages :interval "10m" "checkupdates | wc -l")
 (defpoll misc-git-last-activity :interval "10m" "/home/cr0xd/main/friday/dotfiles/eww/modules/git_last_activity.sh")
-(defpoll misc-audio-symbol :interval "50ms" "/home/cr0xd/main/friday/dotfiles/eww/modules/audio-output-symbol.sh")
-(defpoll misc-audio-volume :interval "50ms" "amixer get Master | grep -o -E '[0-9]+%' | sort | tail -n1")
+(defpoll misc-audio-symbol :interval "10s" "/home/cr0xd/main/friday/dotfiles/eww/modules/audio-output-symbol.sh")
+(defpoll misc-audio-volume :interval "10s" "amixer get Master | grep -o -E '[0-9]+%' | sort | tail -n1")
 
 (defwidget file-discovery []
   (box :orientation "h" :class "tile" :space-evenly "true"
@@ -286,4 +286,4 @@
   )
 )
 
-(defpoll notifications-poll :interval "1s" "/home/cr0xd/main/friday/dotfiles/eww/modules/friday--notifications.sh --notifications")
+(defpoll notifications-poll :interval "10s" "/home/cr0xd/main/friday/dotfiles/eww/modules/friday--notifications.sh --notifications")
