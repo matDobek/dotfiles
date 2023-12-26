@@ -29,6 +29,7 @@ alias scr='j scripts'
 alias reload--scripts='ln -sf ~/MEGA/main/projects/_ongoing/scripts/* ~/.local/bin/'
 alias reload--bash='source ~/.bash_profile'
 alias reload--x='xrdb ~/.Xresources'
+alias reload--eww='eww close-all && eww reload && eww open dock && eww open control-center'
 
 alias top='top -o cpu'
 alias topx='bashtop'
@@ -73,11 +74,6 @@ alias friday--sound--clap='( cvlc --play-and-exit --no-one-instance /home/cr0xd/
 alias friday--sound--gta='( cvlc --play-and-exit --no-one-instance /home/cr0xd/main/friday/dotfiles/sounds/gta_vc_mission_passed.mp3 > /dev/null 2>&1 & )'
 
 alias nice--json='python -m json.tool'
-
-# --------------------
-# eww
-# --------------------
- alias eww--reload='eww close-all && eww reload && eww open dock && eww open control-center'
 
 # --------------------
 # LaTeX
