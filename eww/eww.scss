@@ -1,62 +1,45 @@
+//=======================================================
+//===== Variables
+//=======================================================
+
 $color-black: #121212;
 $color-white: #F0ECF9;
 
-//
-// Previous color palette: (rose)
-// $color-black: #121212;
-// $color-background: #ef9eac;
-// $color-secondary: #633636;
-// $color-primary: #F2E0C0;
-//
-// $color-red: #C98282;
-// $color-green: #A6C982;
-// $color-blue: #82B2C9;
-//
-//
+$color-primary:    #f2e0c0;
+$color-secondary:  #633636;
+$color-tertiary:   #B07C7A;
+$color-background: #121212;
 
-$color-primary:   #f2e0c0;
-$color-secondary: #633636;
-$color-tertiary:  #B07C7A;
+//=======================================================
+//===== Styles
+//=======================================================
+
+//----------------------------------
+// Common
+//----------------------------------
 
 * {
   all: unset;
-  //font-family: feather;
-  //font-family: DaddyTimeMono NF;
 }
-
-// --------------------
-
-* {
-  all: unset;
-  //font-family: feather;
-  //font-family: DaddyTimeMono NF;
-}
-
-// --------------------
-// --- common
-// --------------------
 
 .tile {
-  background-color: $color-primary;
-  padding: 20px 20px;
-  border: 5px solid;
-  border-color: $color-secondary;
+  background-color: $color-background;
+  border-color: $color-primary;
+  border: 1px solid;
   border-radius: 10px;
+  padding: 20px 20px;
 }
 
 
-// --------------------
-// --- control-center
-// --------------------
+//----------------------------------
+// Control Center
+//----------------------------------
 
 .control-center {
   font-size: 35px;
 
   .btn {
-    color: $color-secondary;
-    //background: $color-secondary;
-    //border: 5px solid;
-    //border-color: $color-secondary;
+    color: $color-tertiary;
     margin: 0 5px;
   }
 
@@ -64,7 +47,7 @@ $color-tertiary:  #B07C7A;
     font-size: 1.3em;
 
     .primary {
-      color: $color-secondary;
+      color: $color-primary;
     }
 
     .secondary {
@@ -74,7 +57,7 @@ $color-tertiary:  #B07C7A;
 
   .calendar {
     .primary {
-      color: $color-secondary;
+      color: $color-primary;
     }
 
     .secondary {
@@ -86,16 +69,16 @@ $color-tertiary:  #B07C7A;
   .metric-graph {
     label {
       font-size: 0.7em;
-      color: $color-secondary;
+      color: $color-primary;
     }
 
     circular-progress {
+      color: $color-primary;
       background-color: $color-secondary;
-      color: $color-tertiary;
 
       label {
         font-size: 1.2em;
-        color: $color-secondary;
+        color: $color-primary;
       }
     }
   }
@@ -107,23 +90,18 @@ $color-tertiary:  #B07C7A;
   .avatar {
     margin: 0;
     background-image: url("/home/cr0xd/main/personal/images/avatars/avatar.png");
-    //background-repeat: no-repeat;
-    //min-width: 150px;
     min-height: 200px;
-    // background-size: cover;
     background-position: center;
-    // background-position: 30%;
-    // border-radius: 100px;
   }
 }
 
-// --------------------
-// --- utils
-// --------------------
+//----------------------------------
+// Utils
+//----------------------------------
 
 .utils {
   .icon {
-    color: $color-secondary;
+    color: $color-primary;
   }
 
   .value {
@@ -132,22 +110,22 @@ $color-tertiary:  #B07C7A;
   }
 }
 
-// --------------------
-// --- notification-center
-// --------------------
+//----------------------------------
+// Notification Center
+//----------------------------------
 
 .notification-center {
   font-size: 35px;
-  color: $color-secondary;
+  color: $color-primary;
 }
 
 .notification {
   font-size: 35px;
-  color: $color-secondary;
+  color: $color-primary;
 
-  background-color: $color-secondary;
+  background-color: $color-primary;
   border: 2px solid;
-  border-color: $color-secondary;
+  border-color: $color-primary;
   border-radius: 10px;
 
   .notification-icon {
@@ -186,24 +164,24 @@ $color-tertiary:  #B07C7A;
   }
 }
 
-// --------------------
-// --- dock
-// --------------------
+//----------------------------------
+// Dock
+//----------------------------------
 
 .dock {
   padding: 5px 20px;
-  background-color: $color-black;
+  background-color: $color-background;
 
   .workspaces-start {
     font-size: 1.0em;
     color: $color-secondary;
-    background-color: $color-black;
+    background-color: $color-background;
   }
 
   .workspaces-end {
     font-size: 1.0em;
     color: $color-secondary;
-    background-color: $color-black;
+    background-color: $color-background;
   }
 
   .workspaces {
@@ -225,20 +203,3 @@ $color-tertiary:  #B07C7A;
     }
   }
 }
-
-//.metric scale trough highlight {
-  //color: #000000;
-  //background: linear-gradient(90deg, #88c0d0 0%, #81a1c1  50%, #5E81ac 100%);
-//}
-//.metric scale trough {
-  //background-color: #545454;
-  //min-height: 10px;
-  //min-width: 50px;
-  //margin-left: 10px;
-  //margin-right: 5px;
-//}
-
-//.metric .label {
-  //color: #B48EAD;
-  //font-size: 1.5rem;
-//}
