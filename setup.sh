@@ -131,6 +131,7 @@ function nvim() {
   ln -sf $dotfiles_dir/nvim/init.lua ~/.config/nvim/
 
   ln -sf $dotfiles_dir/nvim/after ~/.config/nvim/
+  ln -sf $dotfiles_dir/nvim/colors ~/.config/nvim/
   ln -sf $dotfiles_dir/nvim/lua ~/.config/nvim/
 }
 
