@@ -50,10 +50,6 @@ paru -S --noconfirm eww-git           # allows to implement custom widgets in an
 paru -S --noconfirm vala tiramisu-git # desktop notifications, the UNIX way
 paru -S --noconfirm betterlockscreen  # fast and sweet looking lockscreen
 
-sudo pacman -S --noconfirm alsa-utils                 # dealing with hardware audio cards
-sudo pacman -S --noconfirm pulseaudio pulseaudio-alsa # proxy for application layer
-sudo pacman -S --noconfirm pavucontrol                # front-end for pulse
-
 sudo pacman -S --noconfirm alacritty
 
 sudo pacman -S --noconfirm xmonad
@@ -230,10 +226,6 @@ paru -S --noconfirm xcolor farge # pick color from the screen
 
 paru -S --noconfirm google-chrome
 
-# No sound
-sudo pacman -S --noconfirm alsa-utils
-
-
 # NVIDIA
 # Grep Card
 # lspci -k | grep -A 2 -E "(VGA|3D)"
@@ -309,7 +301,6 @@ sudo pacman -S --noconfirm wofi
 sudo pacman -S --noconfirm waybar # statusbar
 paru -S --noconfirm checkupdates-with-aur # for status bar
 
-sudo pacman -S --noconfirm pipewire # enable screenshare on Hyperland
 sudo pacman -S --noconfirm xdg-desktop-portal-hyprland
 sudo pacman -S --noconfirm xdg-desktop-portal-gtk # filepicker
 
@@ -330,3 +321,17 @@ paru -S --noconfirm nerd-fonts-git
 
 
 sudo pacman -S --noconfirm socat
+
+
+#
+# Sound
+#
+
+# sudo pacman -S --noconfirm pulseaudio pulseaudio-alsa # OBSOLETE sound server
+sudo pacman -S --noconfirm pipewire # low level multimedia framework ( audio / video )
+sudo pacman -S --noconfirm pipewire-audio # sound server ( like PulseAudio )
+sudo pacman -S --noconfirm pipewire-alsa
+sudo pacman -S --noconfirm pipewire-pulse # backward compatibility for PulseAudio dependent apps
+sudo pacman -S --noconfirm wireplumber # session manager
+sudo pacman -S --noconfirm alsa-utils  # essential utilities, also: amixer
+sudo pacman -S --noconfirm pavucontrol # FIXME: GUI interface for PulseAudio
