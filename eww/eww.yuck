@@ -11,9 +11,6 @@
 ; --- Variables
 ; --------------------
 
-(defpoll time_poll :interval "1s" "date '+%H:%M'")
-(defpoll date_poll :interval "1m" "date '+%d %b'")
-
 ;(deflisten workspaces_listen "./modules/workspaces_x11.sh")
 (deflisten workspaces_listen "/home/cr0xd/main/friday/dotfiles/eww/modules/workspaces_wayland.sh")
 ;(deflisten notifications_short_listen :initial '{"show": false, "content": ""}' "./modules/notifications_short.sh")
@@ -113,9 +110,6 @@
 ; 
 (defwidget workspace [current active] (box :class {active ? "active" : "inactive"} {current ? "" : ""}))
 
-;(defwidget date [] (icon-module :class "date" :icon "" (label :text date_poll)))
-;(defwidget time [] (icon-module :class "time" :icon "" (label :text time_poll)))
-
 ;(defwidget notification-short-revealer []
   ;(box :class "notification-short-revealer"
        ;:orientation "h"
@@ -203,9 +197,8 @@
   )
 )
 
-(defpoll clock-time :interval "1s"  "date +'%H : %M'")
-(defpoll clock-hh :interval "1s"  "date +'%H'")
-(defpoll clock-mm :interval "1s"  "date +'%M'")
+(defpoll clock-hh :interval "10s"  "date +'%H'")
+(defpoll clock-mm :interval "10s"  "date +'%M'")
 
 (defwidget cal []
       (box :orientation "v" :class "calendar tile" :space-evenly false
@@ -232,10 +225,10 @@
   )
 )
 
-(defpoll misc-system-packages :interval "10m" "checkupdates | wc -l")
+(defpoll misc-system-packages :interval "30m" "checkupdates | wc -l")
 (defpoll misc-git-last-activity :interval "10m" "/home/cr0xd/main/friday/dotfiles/eww/modules/git_last_activity.sh")
-(defpoll misc-audio-symbol :interval "10s" "/home/cr0xd/main/friday/dotfiles/eww/modules/audio-output-symbol.sh")
-(defpoll misc-audio-volume :interval "10s" "amixer get Master | grep -o -E '[0-9]+%' | sort | tail -n1")
+(deflisten misc-audio-symbol "/home/cr0xd/main/friday/dotfiles/eww/modules/audio-symbol.sh")
+(deflisten misc-audio-volume "/home/cr0xd/main/friday/dotfiles/eww/modules/audio-volume.sh")
 
 (defwidget file-discovery []
   (box :orientation "h" :class "tile" :space-evenly "true"
@@ -286,4 +279,4 @@
   )
 )
 
-(defpoll notifications-poll :interval "10s" "/home/cr0xd/main/friday/dotfiles/eww/modules/friday--notifications.sh --notifications")
+(defpoll notifications-poll :interval "1h" "/home/cr0xd/main/friday/dotfiles/eww/modules/friday--notifications.sh --notifications")
