@@ -21,7 +21,7 @@ case "$command" in
   ;;
 esac
 
-volume=$(wpctl get-volume 61 | grep -oE "[0-9]+" | tail -n1 | xargs -I# echo "#%")
+volume=$(wpctl get-volume ${id} | grep -oE "[0-9]+" | tail -n1 | xargs -I# echo "#%")
 is_muted=$(wpctl get-volume $id | grep "MUTED")
 
 if [ "$is_muted" != "" ]; then

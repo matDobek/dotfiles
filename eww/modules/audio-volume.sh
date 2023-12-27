@@ -6,7 +6,7 @@
 
 symb() {
   local id=$(wpctl status | sed -n "/Sinks:/,\$p" | grep "\*" | grep -oE "[0-9]+" | head -n1)
-  local volume=$(wpctl get-volume 61 | grep -oE "[0-9]+" | tail -n1 | xargs -I# echo "#%")
+  local volume=$(wpctl get-volume $id | grep -oE "[0-9]+" | tail -n1 | xargs -I# echo "#%")
 
   echo "${volume}"
 }
