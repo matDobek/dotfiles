@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+
+command="$1"
+
+id=$(wpctl status | sed -n "/Sinks:/,\$p" | grep "\*" | grep -oE "[0-9]+" | head -n1)
+
+case "$command" in
+  "toggle")
+    wpctl set-mute $id toggle
+  ;;
+  "+")
+    wpctl set-mute $id 0
+    wpctl set-volume $id 2%+
+  ;;
+  "-")
+    wpctl set-mute $id 0
+    wpctl set-volume $id 2%-
+  ;;
+  *)
+    :
+  ;;
+esac
+
+volume=$(wpctl get-volume 61 | grep -oE "[0-9]+" | tail -n1 | xargs -I# echo "#%")
+is_muted=$(wpctl get-volume $id | grep "MUTED")
+
+if [ "$is_muted" != "" ]; then
+  friday--notify "Volume: OFF" 1
+else
+  friday--notify "Volume: ${volume}" 1
+fi
+
+# friday--notify "Volume: OFF" 1
+# amixer get Master | grep -Eo "[0-9]+%" | xargs -I% friday--notify "Volume: %" 1
