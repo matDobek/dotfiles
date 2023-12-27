@@ -10,6 +10,11 @@ function generete_eww {
     local current=${workspaces[$i]}
     local next=${workspaces[$(($i + 1))]}
 
+    # skip special workspace ( scratchpad )
+    if [ ${current} == "special:magic" ]; then
+      continue
+    fi
+
     if (( ${active_workspace} == ${current} )); then
       rslt+=" (workspace :current true :active true)"
     else
