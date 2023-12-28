@@ -1,6 +1,10 @@
 # Preview
 
-![image](https://user-images.githubusercontent.com/4257729/165862505-3c2f1566-3fb0-4059-8d47-014a35873b64.png)
+![image](https://github.com/matDobek/dotfiles/assets/4257729/f536bc33-a477-438c-8cac-338bc6e87725)
+![image](https://github.com/matDobek/dotfiles/assets/4257729/fb38ee52-d13c-4cde-8b20-f36e19c109a6)
+![image](https://github.com/matDobek/dotfiles/assets/4257729/e20c9e1f-c838-46d9-a894-2df0fa5dcc01)
+![image](https://github.com/matDobek/dotfiles/assets/4257729/2234b170-68fb-4b86-8a46-3fad461f3829)
+
 
 # Post Installation
 
