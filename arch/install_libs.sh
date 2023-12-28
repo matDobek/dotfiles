@@ -335,3 +335,5 @@ sudo pacman -S --noconfirm pipewire-pulse # backward compatibility for PulseAudi
 sudo pacman -S --noconfirm wireplumber # session manager
 sudo pacman -S --noconfirm alsa-utils  # essential utilities, also: amixer
 sudo pacman -S --noconfirm pavucontrol # FIXME: GUI interface for PulseAudio
+
+paru -S --noconfirm hyprshot # screenshot
