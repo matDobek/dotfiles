@@ -41,7 +41,6 @@ sudo pacman -S --noconfirm xorg-xlsfonts  # list fonts in older formats ( useful
 
 sudo pacman -S --noconfirm wmctrl     # window manager info
 sudo pacman -S --noconfirm dzen2      # notifications
-sudo pacman -S --noconfirm rofi       # launcher
 sudo pacman -S --noconfirm picom      # pretty windows (shadows, transparency, ... )
 sudo pacman -S --noconfirm feh        # image viewer ( set wallpaper )
 sudo pacman -S --noconfirm conky      # system monitor, system info
@@ -337,3 +336,19 @@ sudo pacman -S --noconfirm alsa-utils  # essential utilities, also: amixer
 sudo pacman -S --noconfirm pavucontrol # FIXME: GUI interface for PulseAudio
 
 paru -S --noconfirm hyprshot # screenshot
+
+
+# python dependencies
+sudo pacman -S --noconfirm tk
+
+#
+# X11
+#
+
+# sudo pacman -S --noconfirm rofi
+
+#
+# Wayland
+#
+
+sudo pacman -S --noconfirm rofi-wayland
