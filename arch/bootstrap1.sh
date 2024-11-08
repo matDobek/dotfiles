@@ -11,8 +11,7 @@
 #└─nvme0n1p3 259:3    0 441.4G  0 part
 
 partition_boot=/dev/nvme0n1p1
-partition_prim=/dev/nvme0n1p2
-partition_secd=/dev/nvme0n1p3
+partition_prim=/dev/nvme0n1p3
 
 echo "===================="
 echo "Create filesystem"
@@ -20,14 +19,14 @@ echo "===================="
 
 mkfs.fat -F32 $partition_boot
 mkfs.ext4 -F $partition_prim
-mkfs.ext4 -F $partition_secd
 
 echo "===================="
 echo "Mount Linux and install base dependencies"
 echo "===================="
 
 mount $partition_prim /mnt
-pacstrap /mnt base linux linux-firmware vim neovim networkmanager sudo
+mount --mkdir $partition_boot /mnt/boot
+pacstrap /mnt base linux linux-firmware vim networkmanager sudo
 
 echo "===================="
 echo "Setup file system table (all available disks and partitions)"
@@ -39,10 +38,7 @@ echo "===================="
 echo "Setup custom scripts"
 echo "===================="
 
-mkdir -p /mnt/home/cr0xd
-#cp /root/bootstrap1.sh /mnt/home/cr0xd/
-#cp /root/bootstrap2.sh /mnt/home/cr0xd/
-cp -r /media/usb/main* /mnt/home/cr0xd/
+# TBD
 
 echo "===================="
 echo "Log in to the new system"
