@@ -182,3 +182,6 @@ tmux
 nvim
 
 ruby
+
+asdf plugin add erlang
+asdf plugin install erlang latest

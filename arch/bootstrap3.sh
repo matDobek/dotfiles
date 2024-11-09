@@ -30,6 +30,13 @@ sudo pacman -S --noconfirm git
 
 install_paru
 
+# ====================
+# Drivers
+# ====================
+
+sudo pacman -S --noconfirm nvidia
+sudo pacman -S --noconfirm nvidia-utils
+
 #================
 # Desktop Environment
 #================
@@ -50,14 +57,60 @@ paru -S --noconfirm vala tiramisu-git # desktop notifications, the UNIX way
 paru -S --noconfirm betterlockscreen  # fast and sweet looking lockscreen
 
 sudo pacman -S --noconfirm alacritty
+sudo pacman -S --noconfirm kitty
 
 sudo pacman -S --noconfirm xmonad
 sudo pacman -S --noconfirm xmonad-contrib
 xmonad --recompile
 
 # ====================
+# Wayland
+# ====================
+
+# sudo pacman -S --noconfirm rofi
+sudo pacman -S --noconfirm xclip  # (X11)
+
+sudo pacman -S --noconfirm egl-wayland
+sudo pacman -S --noconfirm rofi-wayland
+sudo pacman -S --noconfirm wl-clipboard # (Wayland)
+
+sudo pacman -S --noconfirm hyprland
+
+sudo pacman -S --noconfirm waybar # statusbar
+paru -S --noconfirm checkupdates-with-aur # for status bar
+
+sudo pacman -S --noconfirm xdg-desktop-portal-hyprland
+sudo pacman -S --noconfirm xdg-desktop-portal-gtk # filepicker
+
+sudo pacman -S --noconfirm qt5-wayland # QT Wayland Support
+sudo pacman -S --noconfirm qt6-wayland # QT Wayland Support
+
+sudo pacman -S --noconfirm gammastep
+sudo pacman -S --noconfirm swaybg # wallpaper
+sudo pacman -S --noconfirm mpvpaper # moving wallpaper
+
+paru -S --noconfirm eww-wayland
+
+sudo pacman -S --noconfirm socat
+
+# ====================
+# Sound
+# ====================
+
+# sudo pacman -S --noconfirm pulseaudio pulseaudio-alsa # OBSOLETE sound server
+sudo pacman -S --noconfirm pipewire # low level multimedia framework ( audio / video )
+sudo pacman -S --noconfirm pipewire-audio # sound server ( like PulseAudio )
+sudo pacman -S --noconfirm pipewire-alsa
+sudo pacman -S --noconfirm pipewire-pulse # backward compatibility for PulseAudio dependent apps
+sudo pacman -S --noconfirm wireplumber # session manager
+sudo pacman -S --noconfirm alsa-utils  # essential utilities, also: amixer
+sudo pacman -S --noconfirm pavucontrol # FIXME: GUI interface for PulseAudio
+
+# ====================
 # Terminal Tools
 # ====================
+
+sudo pacman -S --noconfirm man
 
 sudo pacman -S --noconfirm tmux
 sudo pacman -S --noconfirm z
@@ -68,9 +121,16 @@ sudo pacman -S --noconfirm curl
 sudo pacman -S --noconfirm pv                  # monitor the progress of data through a pipe
 sudo pacman -S --noconfirm redshift
 sudo pacman -S --noconfirm the_silver_searcher # ag
-sudo pacman -S --noconfirm xclip
 sudo pacman -S --noconfirm maim                # screenshots :: taking
 sudo pacman -S --noconfirm krita               # screenshots :: editing
+sudo pacman -S --noconfirm fastfetch           # fetching system information and displaying them in a pretty way
+sudo pacman -S --noconfirm ncdu                # disk usage
+sudo pacman -S --noconfirm nnn                 # file manager
+
+paru -S --noconfirm xcolor farge               # pick color from the screen
+sudo pacman -S --noconfirm bc                  # required by farge
+
+paru -S --noconfirm nvitop                     # top for Nvidia GPU
 
 # ====================
 # Fonts
@@ -78,10 +138,17 @@ sudo pacman -S --noconfirm krita               # screenshots :: editing
 
 pacman -S --noconfirm ttf-fira-code
 paru -S --noconfirm nerd-fonts-fira-code
+
 # Fonts for google chrome - to display unicode symbls ( ·)
 sudo pacman -S --noconfirm noto-fonts
 sudo pacman -S --noconfirm noto-fonts-emoji
-paru -S --noconfirm  ttf-font-awesome
+
+# LARGE collection of fonts ( ~10GB )
+# contains: https://github.com/ryanoasis/powerline-extra-symbols
+paru -S --noconfirm nerd-fonts-git
+
+# paru -S --noconfirm ttf-font-awesome
+
 fc-cache -vf
 
 #================
@@ -126,36 +193,14 @@ sudo pacman -S --noconfirm gnome-keyring # Stores passwords and encryption keys
 # Other
 # ====================
 
-sudo pacman -S --noconfirm firefox
 paru -S --noconfirm discord
 paru -S --noconfirm spotify
-
-#===================
-# LaTeX
-#===================
-#   https://wiki.archlinux.org/title/TeX_Live
-#
-#   To install additional packages:
-#     tlmgr install package_name
-#===================
-
-sudo pacman -Sy --noconfirm texlive-most
 
 #================
 # Lanugages
 #================
 
 paru -S --noconfirm unzip asdf-vm
-
-# as user, in home dir
-
-#asdf plugin add erlang
-#asdf install erlang latest
-#asdf local erlang latest
-
-#asdf plugin add elixir
-#asdf install elixir latest
-#asdf local elixir latest
 
 #===================
 # Language servers
@@ -170,10 +215,7 @@ paru -S --noconfirm unzip asdf-vm
 
 sudo pacman -S --noconfirm fzf
 sudo pacman -S --noconfirm neovim
-
-# Can I use asdf instead of global install?
-#sudo pacman -S --noconfirm python3
-#sudo pacman -S --noconfirm python-pip
+paru -S --noconfirm google-chrome
 
 # This should be done as USER
 #python3 -m pip install --user --upgrade pynvim
@@ -181,61 +223,16 @@ sudo pacman -S --noconfirm neovim
 #gem install neovim
 
 #================
-# Steam installation
-#================
-
-# uncomment MULTILIB
-#sudo vim /etc/pacman.conf
-#sudo pacman -S --noconfirm nvidia
-#sudo pacman -S --noconfirm nvidia-utils
-
-#sudo pacman -S wine
-#sudo pacman -S steam-manjaro
-#sudo pacman -S nvidia-440xx-utils
-#yay -S steam-fonts
-
-#================
-# Graphics card driver
-#================
-
-#
-# WARN : you have to choose version manually
-#
-# lspci | grep -e VGA -e 3D
-# pacman -S nvidia-440xx-utils
-#
-
-pacman -S --noconfirm nvidia
-
-#================
 # New
 #================
-
-# add me
-paru -S --noconfirm xcolor farge # pick color from the screen
-
-# Where?
-# betterlockscreen -u ./xmonad/background.jpg
 
 #
 # Post Issues
 #
 
-# Chromium instead of google chrome
+sudo pacman -S --noconfirm nemo # graphics file manager
 
-paru -S --noconfirm google-chrome
-
-# NVIDIA
-# Grep Card
-# lspci -k | grep -A 2 -E "(VGA|3D)"
-# Lookup the drivers:
-# https://nouveau.freedesktop.org/CodeNames.html
-
-# graphics file manager
-sudo pacman -S --noconfirm nemo
-
-# to enable phoenix live reloading
-sudo pacman -S --noconfirm inotify-tools
+sudo pacman -S --noconfirm inotify-tools # required for phoenix live reloading
 
 #sudo pacman -S --noconfirm zsh
 #sudo pacman -S --noconfirm zsh-autosuggestions
@@ -251,8 +248,6 @@ sudo pacman -S lazygit
 sudo pacman -S ngrok
 
 sudo pacman -S obsidian
-sudo pacman -S gcc
-sudo pacman -S make
 
 sudo pacman -S git-lfs
 
@@ -264,91 +259,12 @@ sudo pacman -S git-lfs
 # sudo pacman -Sy libxau libxi libxss libxtst libxcursor libxcomposite libxdamage libxfixes libxrandr libxrender mesa-libgl  alsa-lib libglvnd
 
 
-sudo pacman -S --noconfirm kitty
 sudo pacman -S --noconfirm pgcli # psql with syntax highlight
-# paru -S --noconfirm logseq-desktop
 
-#sudo pacman -S wireshark-qt
 paru -S --noconfirm yt-dlp
-paru -S vlc # for cvlc (playing sounds)
-
-sudo pacman -S helix
-sudo pacman -S fastfetch
-#paru -S brave-bin
-paru -S ncdu # disk utility
-
-
-
-# no notifications?
-# no border on top
-curl https://sh.rustup.rs -sSf | sh
-rustup toolchain install nightly
-paru -S --noconfirm eww-git
-
-#
-# Hyperland wannabe
-#
-
-#TODO: remove nvidia
-# https://nouveau.freedesktop.org/CodeNames.html
-paru -S --noconfirm mesa # nouveau drivers (GeForce 1060 - NV130 family (NV136))
-
-sudo pacman -S --noconfirm hyprland
-
-sudo pacman -S --noconfirm wofi
-
-sudo pacman -S --noconfirm waybar # statusbar
-paru -S --noconfirm checkupdates-with-aur # for status bar
-
-sudo pacman -S --noconfirm xdg-desktop-portal-hyprland
-sudo pacman -S --noconfirm xdg-desktop-portal-gtk # filepicker
-
-sudo pacman -S --noconfirm qt5-wayland # QT Wayland Support
-sudo pacman -S --noconfirm qt6-wayland # QT Wayland Support
-
-sudo pacman -S --noconfirm nnn # file manager
-
-sudo pacman -S --noconfirm gammastep
-sudo pacman -S --noconfirm swaybg # wallpaper
-sudo pacman -S --noconfirm mpvpaper # moving wallpaper
-
-paru -S --noconfirm eww-wayland
-
-# repository of multiple unicode fonts
-# cheet sheet: https://www.nerdfonts.com/cheat-sheet
-paru -S --noconfirm nerd-fonts-git
-
-
-sudo pacman -S --noconfirm socat
-
-
-#
-# Sound
-#
-
-# sudo pacman -S --noconfirm pulseaudio pulseaudio-alsa # OBSOLETE sound server
-sudo pacman -S --noconfirm pipewire # low level multimedia framework ( audio / video )
-sudo pacman -S --noconfirm pipewire-audio # sound server ( like PulseAudio )
-sudo pacman -S --noconfirm pipewire-alsa
-sudo pacman -S --noconfirm pipewire-pulse # backward compatibility for PulseAudio dependent apps
-sudo pacman -S --noconfirm wireplumber # session manager
-sudo pacman -S --noconfirm alsa-utils  # essential utilities, also: amixer
-sudo pacman -S --noconfirm pavucontrol # FIXME: GUI interface for PulseAudio
+paru -S --noconfirm vlc # for cvlc (playing sounds)
 
 paru -S --noconfirm hyprshot # screenshot
 
-
 # python dependencies
 sudo pacman -S --noconfirm tk
-
-#
-# X11
-#
-
-# sudo pacman -S --noconfirm rofi
-
-#
-# Wayland
-#
-
-sudo pacman -S --noconfirm rofi-wayland

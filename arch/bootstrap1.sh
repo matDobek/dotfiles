@@ -9,9 +9,20 @@
 #├─nvme0n1p1 259:1    0   512M  0 part
 #├─nvme0n1p2 259:2    0   512G  0 part
 #└─nvme0n1p3 259:3    0 441.4G  0 part
+#
+# To rearrange partitions:
+# fdisk /dev/nvme0n1
+# [fdisk] p # print current layout
+# [fdisk] d # delete
+# [fdisk] n # new
+#	+10G
+# [fdisk] t # change type
+# 	EFI System for 1st one
+# 	Linux Filesystem for rest
+#
 
 partition_boot=/dev/nvme0n1p1
-partition_prim=/dev/nvme0n1p3
+partition_prim=/dev/nvme0n1p2
 
 echo "===================="
 echo "Create filesystem"
