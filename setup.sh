@@ -94,9 +94,13 @@ function kitty() {
 function bash() {
   ln -sf $dotfiles_dir/bash/.bashrc ~/
   ln -sf $dotfiles_dir/bash/.bash_aliases ~/
-  ln -sf $dotfiles_dir/bash/.bash_secrets.sample ~/
   ln -sf $dotfiles_dir/bash/.bash_profile ~/
   ln -sf $dotfiles_dir/bash/.inputrc ~/
+
+  if [ ! -f ~/.bash_secrets ]; then
+    echo "Make sure to fill out ~/.bash_secrets"
+    cp $dotfiles_dir/bash/.bash_secrets.sample ~/.bash_secrets
+  fi
 }
 
 #================
@@ -182,6 +186,3 @@ tmux
 nvim
 
 ruby
-
-asdf plugin add erlang
-asdf plugin install erlang latest
