@@ -8,10 +8,11 @@ echo "===================="
 ln -sf /usr/share/zoneinfo/Europe/Warsaw /etc/localtime
 hwclock --systohc
 
+echo en_US.UTF-8 UTF-8 >> /etc/locale.gen
 echo en_GB.UTF-8 UTF-8 >> /etc/locale.gen
 echo pl_PL.UTF-8 UTF-8 >> /etc/locale.gen
 locale-gen
-echo LANG=en_GB.UTF-8 > /etc/locale.conf
+echo LANG=en_US.UTF-8 > /etc/locale.conf
 echo KEYMAP=pl > /etc/vconsole.conf
 
 echo "===================="
