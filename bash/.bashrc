@@ -171,7 +171,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # --------------------
 # Rust
 # --------------------
-source "$(asdf where rust)/env"
+# source "$(asdf where rust)/env"
 
 # --------------------
 # OS Specyfic :: Mac
