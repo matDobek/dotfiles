@@ -7,43 +7,61 @@ end
 vim.cmd.packadd("packer.nvim")
 
 require("packer").startup(function(use)
-  -- Packer can manage itself
+  -- -----------------------------
+  -- Packer
+  -- -----------------------------
   use "wbthomason/packer.nvim"
 
+  -- -----------------------------
   -- Treesitter
+  -- -----------------------------
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 
+  -- -----------------------------
   -- LSP Support
+  -- -----------------------------
   use 'neovim/nvim-lspconfig'
   use 'williamboman/mason.nvim'
   use "williamboman/mason-lspconfig.nvim"
 
+  -- -----------------------------
   -- Testing
+  -- -----------------------------
   use {
     "nvim-neotest/neotest",
     requires = {
+      "nvim-neotest/nvim-nio",
+      "nvim-lua/plenary.nvim",
       "antoinemadec/FixCursorHold.nvim",
+      "nvim-treesitter/nvim-treesitter",
+
       -- languages
       "nvim-neotest/neotest-go",
     }
   }
 
+  -- -----------------------------
   -- Debugger
-  use 'mfussenegger/nvim-dap'
-  use 'jay-babu/mason-nvim-dap.nvim'
-  use 'leoluz/nvim-dap-go'
-  use 'rcarriga/nvim-dap-ui'
-  use 'theHamsta/nvim-dap-virtual-text'
+  -- -----------------------------
+  -- use 'mfussenegger/nvim-dap'
+  -- use 'jay-babu/mason-nvim-dap.nvim'
+  -- use 'leoluz/nvim-dap-go'
+  -- use 'rcarriga/nvim-dap-ui'
+  -- use 'theHamsta/nvim-dap-virtual-text'
   use 'folke/neodev.nvim'
 
+  -- -----------------------------
   -- Autocompletion
+  -- -----------------------------
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
 
+  -- -----------------------------
   -- Snippets
+  -- -----------------------------
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
   use 'rafamadriz/friendly-snippets'
@@ -57,10 +75,10 @@ require("packer").startup(function(use)
   use "mg979/vim-visual-multi"
   use "ggandor/leap.nvim"
   use 'simrat39/symbols-outline.nvim'
-  use 'nvim-telescope/telescope.nvim'
+  use({'nvim-telescope/telescope.nvim', requires = { "BurntSushi/ripgrep" }})
   use 'nvim-lua/plenary.nvim' -- used by so many plugins, decided to pull it out for clarity
 
-  -- use "fatih/vim-go" -- TODO remove later
+  use "fatih/vim-go" -- TODO remove later
   -- use {
   --   "olexsmir/gopher.nvim",
   --   requires = { -- dependencies
@@ -72,22 +90,22 @@ require("packer").startup(function(use)
   use 'nvimdev/guard-collection'
 
   -- ai stuff
-  use {
-    "Exafunction/codeium.nvim",
-    requires = {
-      "hrsh7th/nvim-cmp",
-    }
-  }
+  -- use {
+  --   "Exafunction/codeium.nvim",
+  --   requires = {
+  --     "hrsh7th/nvim-cmp",
+  --   }
+  -- }
 
-  use({
-    "jackMort/ChatGPT.nvim",
-    config = function()
-      require("chatgpt").setup()
-    end,
-    requires = {
-      "MunifTanjim/nui.nvim",
-    }
-  })
+  -- use({
+  --   "jackMort/ChatGPT.nvim",
+  --   config = function()
+  --     require("chatgpt").setup()
+  --   end,
+  --   requires = {
+  --     "MunifTanjim/nui.nvim",
+  --   }
+  -- })
 
   -- use("github/copilot.vim")
   -- use("aduros/ai.vim")
