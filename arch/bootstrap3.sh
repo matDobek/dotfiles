@@ -126,6 +126,7 @@ sudo pacman -S --noconfirm krita               # screenshots :: editing
 sudo pacman -S --noconfirm fastfetch           # fetching system information and displaying them in a pretty way
 sudo pacman -S --noconfirm ncdu                # disk usage
 sudo pacman -S --noconfirm nnn                 # file manager
+sudo pacman -S --noconfirm ripgrep             # required for grep in neovim
 
 paru -S --noconfirm xcolor farge               # pick color from the screen
 sudo pacman -S --noconfirm bc                  # required by farge
