@@ -123,6 +123,8 @@ sudo pacman -S --noconfirm redshift
 sudo pacman -S --noconfirm the_silver_searcher # ag
 sudo pacman -S --noconfirm maim                # screenshots :: taking
 sudo pacman -S --noconfirm krita               # screenshots :: editing
+sudo pacman -S --noconfirm blender             # blender
+sudo pacman -S --noconfirm python-pyqt5        # krita requirement for scripts
 sudo pacman -S --noconfirm fastfetch           # fetching system information and displaying them in a pretty way
 sudo pacman -S --noconfirm ncdu                # disk usage
 sudo pacman -S --noconfirm nnn                 # file manager
