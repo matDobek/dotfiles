@@ -69,6 +69,7 @@ require("packer").startup(function(use)
   use({ "nvim-tree/nvim-tree.lua", requires = { "nvim-tree/nvim-web-devicons" } })
 
   -- use 'jiangmiao/auto-pairs'
+  use 'windwp/nvim-ts-autotag'
   use "godlygeek/tabular"
   use "terrortylor/nvim-comment"
   -- use "airblade/vim-gitgutter"

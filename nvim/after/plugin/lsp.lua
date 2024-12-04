@@ -22,6 +22,7 @@ require("mason-lspconfig").setup {
 
     'ts_ls',
     'svelte',
+    'cssls',
   },
 }
 
@@ -131,6 +132,7 @@ require'nvim-treesitter.configs'.setup {
     'elixir',
     'go',
     'rust',
+    'css',
   },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
@@ -344,3 +346,4 @@ require("lspconfig").rust_analyzer.setup { capabilities = capabilities }
 
 require'lspconfig'.ts_ls.setup{ capabilities = capabilities }
 require("lspconfig").svelte.setup { capabilities = capabilities }
+require("lspconfig").cssls.setup { capabilities = capabilities }
