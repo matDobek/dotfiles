@@ -204,3 +204,12 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+
+
+
+export DISPLAY=:0
+export XDG_SESSION_TYPE=x11
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/cr0xd/.lmstudio/bin"

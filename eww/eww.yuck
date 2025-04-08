@@ -108,7 +108,7 @@
 ; 
 ; 
 ; 
-(defwidget workspace [current active] (box :class {active ? "active" : "inactive"} {current ? "" : ""}))
+(defwidget workspace [current active] (box :class {active ? "active" : "inactive"} {current ? "" : "" }))
 
 ;(defwidget notification-short-revealer []
   ;(box :class "notification-short-revealer"
