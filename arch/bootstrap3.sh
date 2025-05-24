@@ -175,6 +175,7 @@ sudo systemctl start postgresql.service
 
 paru -S --noconfirm docker
 paru -S --noconfirm docker-compose
+paru -S --noconfirm docker-buildx
 
 sudo usermod -aG docker $USER
 sudo systemctl enable docker.service
@@ -271,3 +272,5 @@ paru -S --noconfirm hyprshot # screenshot
 
 # python dependencies
 sudo pacman -S --noconfirm tk
+
+sudo pacman -S --noconfirm rsync

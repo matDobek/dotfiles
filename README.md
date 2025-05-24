@@ -137,3 +137,9 @@ lsusb | grep Fuji # device connected
 sudo modprobe v4l2loopback video_nr=2 card_label="Fujicam" exclusive_caps=1
 gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -f v4l2 /dev/video2
 ```
+
+##  popups
+
+```
+GDK_BACKEND=x11 /usr/lib/xdg-desktop-portal-gtk
+```

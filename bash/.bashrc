@@ -158,7 +158,8 @@ export PATH=$PATH
 # --------------------
 
 # asdf
-. /opt/asdf-vm/asdf.sh
+# . /opt/asdf-vm/asdf.sh
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # autojump
 [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh

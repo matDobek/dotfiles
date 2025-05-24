@@ -6,9 +6,15 @@ alias j='z'
 alias open='xdg-open'
 #alias aws--login='aws-vault exec -d 8h -n fresha-developer --backend=file'
 alias ssh--login='eval $(ssh-agent -s) && ssh-add ~/.ssh/id_ed25519'
-alias friday--camera-setup='sudo modprobe v4l2loopback'
-alias friday--camera='gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -threads 0 -f v4l2 /dev/video0'
+alias friday--camera-setup='sudo modprobe v4l2loopback video_nr=2 card_label="Fujicam" exclusive_caps=1'
+alias friday--camera='gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -f v4l2 /dev/video2'
 alias timestamp='date +%s'
+
+# --------------------
+# Fix later
+# --------------------
+
+alias friday--fu-open='GDK_BACKEND=x11 /usr/lib/xdg-desktop-portal-gtk'
 
 # --------------------
 # OS Specific :: MacOS
@@ -110,6 +116,14 @@ alias dp='docker system prune'
 alias dri='docker image rm $(docker image ls --all --quiet)'
 
 # --------------------
+# Python
+# --------------------
+
+alias pyv="python -m venv .venv"
+alias vpy=".venv/bin/python"
+alias vpip=".venv/bin/pip"
+
+# --------------------
 # Rails
 # --------------------
 
@@ -156,3 +170,10 @@ alias gitignore_rust="curl -L -s https://www.gitignore.io/api/rust > .gitignore 
 
 alias glsm='git ls-files -m'
 alias gcop="git ls-files -m | fzf | pbcopy"
+
+# --------------------
+# Mouse
+# --------------------
+alias friday--mouse="ratbagctl 0 dpi get"
+alias friday--mouse--normal="ratbagctl 0 dpi set 800"
+alias friday--mouse--slow="ratbagctl 0 dpi set 600"
