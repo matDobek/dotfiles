@@ -1,18 +1,50 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
+####################
+# vars
+####################
+
 src=/home/cr0xd/main
 dest_local=/home/cr0xd/main_backup.tar.gz
+
 src_paths=(
-  "/home/cr0xd/main"
-  "/home/cr0xd/.ssh"
-  "/home/cr0xd/art/ai/shared/workflows"
+  "/home/cr0xd/main/"
+  "/home/cr0xd/.ssh/"
+  "/home/cr0xd/art/ai/shared/workflows/"
 )
+
 dest_paths=(
   "/media/disk/"
   "/media/usb/"
 )
 
-set -euo pipefail
+to_exclude=(
+  # js
+  "node_modules/"
+
+  # rust
+  "target/"
+  "debug/"
+
+  # elixir
+  "_build/"
+  ".elixir_ls/"
+  "deps/"
+
+  # python
+  "__pycache__/"
+)
+
+exclude_args=()
+for item in "${to_exclude[@]}"; do
+  exclude_args+=(--exclude="${item}")
+done
+
+####################
+# verify
+####################
 
 # Check if root
 uid=$(id -u)
@@ -31,28 +63,31 @@ if [[ ! -e /dev/disk/by-label/backup ]]; then
   exit
 fi
 
+####################
+# run
+####################
+
+# echo
+# echo "=== Backup to ${dest_local}"
+# tar -c -f - ${src} -P \
+#   | pv -s $(du -sb ${src} | awk '{print $1}') \
+#   | gzip > ${dest_local}
+
 sudo mount /dev/sda /media/disk
 sudo mount /dev/disk/by-label/backup /media/usb
 
-
-
-echo
-echo "=== Backup to ${dest_local}"
-tar -c -f - ${src} -P \
-  | pv -s $(du -sb ${src} | awk '{print $1}') \
-  | gzip > ${dest_local}
-
-
-
-for dest in "${dest_paths[@]}"; do
+for dest_dir in "${dest_paths[@]}"; do
   echo
-  echo "=== Backup to ${dest}"
+  echo "=== Backup to ${dest_dir}"
 
   for src in "${src_paths[@]}"; do
     echo ${src}
 
-    size=$(rsync -av --delete --dry-run ${src} ${dest} | wc -l)
-    rsync -av --delete ${src} ${dest} | pv -l -s ${size} > /dev/null
+    IFS='/' read -ra path <<< ${src}
+    dest="${dest_dir}${path[-1]}/"
+
+    size=$(rsync -av --delete --delete-excluded --dry-run ${exclude_args[@]} ${src} ${dest} | wc -l)
+    rsync -av --delete --delete-excluded ${exclude_args[@]} ${src} ${dest} | pv -l -s ${size} > /dev/null
   done
 done
 
