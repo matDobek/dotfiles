@@ -62,14 +62,13 @@ alias friday--packages--update-query='paru -Qua'
 alias friday--packages--cleanup='paru --clean'
 alias friday--packages--cleanup--cache='paru -Scc'
 alias friday--packages--remove='paru -R '
-alias system--devices="lsblk --all"
 
 alias friday--reboot='reboot'
 alias friday--shutdown='shutdown now'
 alias friday--hibernate='systemctl hibernate'
 alias friday--suspend='systemctl suspend'
 
-alias mount--usb='mount /dev/disk/by-label/MD /media/usb'
+alias mount--usb='mount /dev/disk/by-label/backup /media/usb'
 alias umount--usb='umount /media/usb'
 
 alias c='xclip -selection clipboard'
@@ -177,3 +176,8 @@ alias gcop="git ls-files -m | fzf | pbcopy"
 alias friday--mouse="ratbagctl 0 dpi get"
 alias friday--mouse--normal="ratbagctl 0 dpi set 800"
 alias friday--mouse--slow="ratbagctl 0 dpi set 600"
+
+# --------------------
+# System
+# --------------------
+alias friday--sys--lsblk="lsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINT"
