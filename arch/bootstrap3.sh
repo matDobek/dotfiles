@@ -274,3 +274,4 @@ paru -S --noconfirm hyprshot # screenshot
 sudo pacman -S --noconfirm tk
 
 sudo pacman -S --noconfirm rsync
+sudo pacman -S --noconfirm cuda
