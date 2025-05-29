@@ -176,9 +176,8 @@ alias gcop="git ls-files -m | fzf | pbcopy"
 # --------------------
 # Mouse
 # --------------------
-alias friday--mouse="ratbagctl 0 dpi get"
-alias friday--mouse--normal="ratbagctl 0 dpi set 800"
-alias friday--mouse--slow="ratbagctl 0 dpi set 600"
+alias friday--mouse--get="ratbagctl 0 dpi get"
+alias friday--mouse--set="ratbagctl 0 dpi set 800 && ratbagctl 0 dpi set 100" # bug need to apply twice
 
 # --------------------
 # System
