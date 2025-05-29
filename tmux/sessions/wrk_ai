@@ -1,0 +1,34 @@
+#--------------------
+# proc
+#--------------------
+
+new-window
+rename-window 'proc'
+send-keys 'cd /home/cr0xd/art/ai/ComfyUI/ComfyUI' C-m
+send-keys './.venv/bin/python main.py --listen' C-m
+
+split-window -v
+send-keys 'cd /home/cr0xd/art/ai/shared/' C-m
+send-keys 'clear' C-m
+
+#--------------------
+# files
+#--------------------
+
+new-window
+rename-window 'files'
+send-keys 'cd /home/cr0xd/art/ai/ComfyUI/ComfyUI' C-m
+send-keys 'clear' C-m
+send-keys 'vim' C-m
+
+#--------------------
+# add
+#--------------------
+
+new-window
+rename-window 'additional'
+send-keys 'cd /home/cr0xd/art/ai/shared/' C-m
+send-keys 'tmux--reorder' C-m
+send-keys 'clear' C-m
+
+# move-window -r
