@@ -28,6 +28,7 @@ send-keys 'vim' C-m
 new-window
 rename-window 'additional'
 send-keys 'cd /home/cr0xd/art/ai/shared/' C-m
+send-keys 'open http://0.0.0.0:8188' C-m
 send-keys 'tmux--reorder' C-m
 send-keys 'clear' C-m
 

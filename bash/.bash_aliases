@@ -145,6 +145,11 @@ alias e--check-credo='mix credo --strict'
 alias e--check-compile='mix compile --warnings-as-errors --force'
 alias e--check='e--check-format && e--check-credo && e--check-compile'
 
+# --------------------
+# Rust
+# --------------------
+
+alias r--repl='evcxr'
 
 # --------------------
 # Git
@@ -177,7 +182,7 @@ alias gcop="git ls-files -m | fzf | pbcopy"
 # Mouse
 # --------------------
 alias friday--mouse--get="ratbagctl 0 dpi get"
-alias friday--mouse--set="ratbagctl 0 dpi set 800 && ratbagctl 0 dpi set 100" # bug need to apply twice
+alias friday--mouse--set="ratbagctl 0 dpi set 1100 && ratbagctl 0 dpi set 1200" # bug need to apply twice
 
 # --------------------
 # System

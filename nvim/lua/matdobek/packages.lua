@@ -7,6 +7,7 @@ end
 vim.cmd.packadd("packer.nvim")
 
 require("packer").startup(function(use)
+
   -- -----------------------------
   -- Packer
   -- -----------------------------
@@ -112,6 +113,14 @@ require("packer").startup(function(use)
   -- use("aduros/ai.vim")
   -- use("nvim-lualine/lualine.nvim")
   use("folke/zen-mode.nvim")
+
+  -- use({
+  --   'MeanderingProgrammer/render-markdown.nvim',
+  --   after = { 'nvim-treesitter' },
+  --   requires = { 'echasnovski/mini.nvim', opt = true }, -- if you use the mini.nvim suite
+  --   -- requires = { 'echasnovski/mini.icons', opt = true }, -- if you use standalone mini plugins
+  --   -- requires = { 'nvim-tree/nvim-web-devicons', opt = true }, -- if you prefer nvim-web-devicons
+  -- })
 
   -- themes
   use("cideM/yui")

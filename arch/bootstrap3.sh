@@ -275,3 +275,5 @@ sudo pacman -S --noconfirm tk
 
 sudo pacman -S --noconfirm rsync
 sudo pacman -S --noconfirm cuda
+
+paru -S --noconfirm calibre-bin # ebook managment

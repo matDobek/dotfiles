@@ -173,6 +173,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # Rust
 # --------------------
 # source "$(asdf where rust)/env"
+source $HOME/.cargo/env
 
 # --------------------
 # OS Specyfic :: Mac
@@ -221,3 +222,4 @@ export PATH="$PATH:/home/cr0xd/.lmstudio/bin"
 export CUDA_HOME=/opt/cuda
 export PATH=$CUDA_HOME/bin:$PATH
 export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
+. "$HOME/.cargo/env"
