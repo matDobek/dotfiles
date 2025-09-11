@@ -143,8 +143,11 @@ function nvim() {
 # helix
 #================
 function helix() {
+  mkdir -p ~/.config/helix/themes/
+
   ln -sf $dotfiles_dir/helix/config.toml ~/.config/helix/
   ln -sf $dotfiles_dir/helix/languages.toml ~/.config/helix/
+  ln -sf $dotfiles_dir/helix/themes/duck.toml ~/.config/helix/themes/
 }
 
 #================
