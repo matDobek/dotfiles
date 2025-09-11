@@ -2,16 +2,8 @@ theme = "earl_grey"
 
 [editor]
 true-color = true
-# bufferline = "always"
 line-number = "relative"
 rulers = [90]
-# scroll-lines = 1
-# gutters = ["diagnostics", "spacer", "line-numbers", "spacer", "diff"]
         
-[editor.whitespace.characters]
-tabpad = "·"
-
-[keys.normal] # do not sort!
+[keys.normal]
 esc = ["collapse_selection", "keep_primary_selection"] # deselect all; keep primary cursor only
-tab = "goto_next_function" # select and jump to the next function via Treesitter
-S-tab = "goto_prev_function" # select and jump to the previous function via Treesitter 
