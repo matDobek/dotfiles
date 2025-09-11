@@ -16,3 +16,23 @@ rename-window 'Dotfiles'
 send-keys 'j dotfiles' C-m
 send-keys 'tmux--reorder' C-m
 send-keys 'vim' C-m
+
+#--------------------
+# comfy
+#--------------------
+
+new-window
+rename-window 'Comfy'
+send-keys 'j comfy' C-m
+send-keys 'tmux--reorder' C-m
+send-keys 'vim' C-m
+
+#--------------------
+# workspace
+#--------------------
+
+new-window
+rename-window 'Notes'
+send-keys 'j notes' C-m
+send-keys 'tmux--reorder' C-m
+send-keys 'vim workspace3.md' C-m

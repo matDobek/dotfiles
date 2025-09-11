@@ -277,3 +277,8 @@ sudo pacman -S --noconfirm rsync
 sudo pacman -S --noconfirm cuda
 
 paru -S --noconfirm calibre-bin # ebook managment
+
+sudo pacman -S --noconfirm rapid-photo-downloader
+
+# obs
+sudo pacman -S obs-studio v4l2loopback-dkms v4l2loopback-utils ffmpeg

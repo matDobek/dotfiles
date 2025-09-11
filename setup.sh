@@ -140,6 +140,14 @@ function nvim() {
 }
 
 #================
+# helix
+#================
+function helix() {
+  ln -sf $dotfiles_dir/helix/config.toml ~/.config/helix/
+  ln -sf $dotfiles_dir/helix/languages.toml ~/.config/helix/
+}
+
+#================
 # ruby
 #================
 
@@ -184,5 +192,6 @@ gpg
 
 tmux
 nvim
+helix
 
 ruby

@@ -8,7 +8,7 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzz")
 vim.keymap.set("n", "N", "Nzzz")
 
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 vim.keymap.set("n", "<leader>Y", [["+Y]])
 
 vim.keymap.set("n", "Q", "<nop>")
@@ -40,7 +40,7 @@ vim.keymap.set("n", "<right>", ":vertical resize -5<cr>")
 vim.keymap.set("n", "<leader>r", ":so<cr>")
 
 -- copy to system clipbord
-vim.keymap.set({"n", "v", "s"}, "<leader>y", [["+y]])
+vim.keymap.set({ "n", "v", "s" }, "<leader>y", [["+y]])
 
 -- close buffer
 vim.keymap.set("n", "<leader>qq", ":bd <cr>")

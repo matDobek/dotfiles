@@ -1,6 +1,6 @@
-require("matdobek/packages")
-require("matdobek/opts")
 require("matdobek/mappings")
+require("matdobek/opts")
+require("matdobek/plugins")
 
 -- enable filetype detection
 vim.cmd('filetype plugin indent on')

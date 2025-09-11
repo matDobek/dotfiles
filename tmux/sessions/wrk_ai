@@ -4,11 +4,11 @@
 
 new-window
 rename-window 'proc'
-send-keys 'cd /home/cr0xd/art/ai/ComfyUI/ComfyUI' C-m
+send-keys 'cd /home/cr0xd/art/ai/ComfyUI' C-m
 send-keys './.venv/bin/python main.py --listen' C-m
 
 split-window -v
-send-keys 'cd /home/cr0xd/art/ai/shared/' C-m
+send-keys '/home/cr0xd/games/ai_backups/shared' C-m
 send-keys 'clear' C-m
 
 #--------------------

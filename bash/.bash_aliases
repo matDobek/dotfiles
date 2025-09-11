@@ -6,8 +6,6 @@ alias j='z'
 alias open='xdg-open'
 #alias aws--login='aws-vault exec -d 8h -n fresha-developer --backend=file'
 alias ssh--login='eval $(ssh-agent -s) && ssh-add ~/.ssh/id_ed25519'
-alias friday--camera-setup='sudo modprobe v4l2loopback video_nr=2 card_label="Fujicam" exclusive_caps=1'
-alias friday--camera='gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -f v4l2 /dev/video2'
 alias timestamp='date +%s'
 
 # --------------------
@@ -46,6 +44,7 @@ alias gpg='LANG=en gpg'
 # for human format use -h, instead of -m
 alias size--all='du -ms $(ls -A) | sort -n | tail -n 21'
 alias size--rec='du -m | sort -n | tail -n 20'
+alias friday--size='ncdu'
 
 # NixOS
 # alias nix--conf='vim /etc/nixos/configuration.nix'
@@ -187,4 +186,26 @@ alias friday--mouse--set="ratbagctl 0 dpi set 1100 && ratbagctl 0 dpi set 1200" 
 # --------------------
 # System
 # --------------------
+
 alias friday--sys--lsblk="lsblk -o NAME,SIZE,FSTYPE,LABEL,MOUNTPOINT"
+
+# --------------------
+# Camera
+# --------------------
+
+alias friday--photo--download="rapid-photo-downloader "
+
+# alias friday--photo--webcam-setup='sudo modprobe v4l2loopback video_nr=2 card_label="Fujicam" exclusive_caps=1'
+# alias friday--photo--webcam='gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -f v4l2 /dev/video2'
+#
+# alias friday--webcam-setup='sudo modprobe v4l2loopback video_nr=2 card_label="Fujicam" exclusive_caps=1'
+alias friday--webcam-setup='sudo modprobe v4l2loopback devices=2 video_nr=2,3 card_label="Fujicam","OBS VirtualCam" exclusive_caps=1,0
+'
+alias friday--webcam='gphoto2 --stdout --capture-movie | ffmpeg -i - -vcodec rawvideo -pix_fmt yuv420p -f v4l2 /dev/video2'
+alias friday--webcam2='while true; do friday--webcam; sleep 1; done'
+
+
+
+
+
+alias friday--loop="mpv --loop=inf --fs "

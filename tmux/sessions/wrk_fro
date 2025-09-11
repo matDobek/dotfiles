@@ -16,6 +16,14 @@ rename-window 'files'
 send-keys 'cd /home/cr0xd/main/friday/tinkering/visual_novel/frontend' C-m
 send-keys 'vim' C-m
 
+split-window -v
+send-keys 'cd /home/cr0xd/main/friday/tinkering/visual_novel/frontend' C-m
+send-keys 'codex' C-m
+
+split-window -h
+send-keys 'cd /home/cr0xd/main/friday/tinkering/visual_novel/frontend' C-m
+send-keys 'git status' C-m
+
 #--------------------
 # add
 #--------------------
