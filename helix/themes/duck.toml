@@ -27,8 +27,11 @@
 
 # markdown
 "markup.link.url" = { modifiers = ["underlined"] }
-"markup.quote"    = "brown"
-"markup.raw"      = "light_grey"
+"markup.quote"    = { fg = "brown" }
+"markup.raw"      = { fg = "light_grey" }
+
+"markup.normal.completion" = { fg = "foreground"}
+"markup.normal.hover" = { fg = "brown"}
 
 [palette]
 

@@ -7,6 +7,7 @@ rulers = [90]
 trim-final-newlines = true
 trim-trailing-whitespace = true
 gutters = ["diagnostics", "line-numbers", "spacer"]
+auto-pairs = false
 
 [editor.inline-diagnostics]
 cursor-line = "hint"
