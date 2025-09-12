@@ -1,3 +1,14 @@
 [[language]]
 name = "typescript"
+auto-format = true
 language-servers = ["typescript-language-server"]
+
+[[language]]
+name = "tsx"
+auto-format = true
+language-servers = ["typescript-language-server"]
+
+[[language]]
+name = "css"
+language-servers = [ "vscode-css-language-server"]
+auto-format = true

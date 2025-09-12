@@ -16,8 +16,14 @@
 "ui.virtual.ruler"   = { bg = "dark_grey" }
 
 # diagnostic
-"error"              = { fg = "red" }
-"diagnostic.error"   = { fg = "foreground", bg = "background", underline = { style = "curl", color = "red" } }
+"error"                = { fg = "error" }
+"warning"              = { fg = "warning" }
+"info"                 = { fg = "info" }
+"hint"                 = { fg = "hint" }
+"diagnostic.error"     = { fg = "foreground", bg = "background", underline = { style = "curl", color = "error" } }
+"diagnostic.warning"   = { fg = "foreground", bg = "background", underline = { style = "curl", color = "warning" } }
+"diagnostic.info"      = { fg = "foreground", bg = "background", underline = { style = "curl", color = "info" } }
+"diagnostic.hint"      = { fg = "foreground", bg = "background", underline = { style = "curl", color = "hint" } }
 
 # markdown
 "markup.link.url" = { modifiers = ["underlined"] }
@@ -33,6 +39,11 @@ light_grey = "#666666"
 dark_grey  = "#191919"
 
 yellow     = "#f2e0c0"
-red        = "#ce4141"
 brown      = "#ac7151"
 pink       = "#fdc0ce"
+
+# diagnostic
+error      = "#ce4141"
+warning    = "#cece41"
+info       = "#4141ce"
+hint       = "#666666"
