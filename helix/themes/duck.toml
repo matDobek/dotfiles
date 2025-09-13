@@ -1,6 +1,7 @@
 "ui.background"      = { bg = "background" }
 "ui.text"            = { fg = "foreground" }
-"ui.selection"       = { bg = "foreground", fg = "background" }
+"ui.cursor"          = { fg = "background", bg = "green"}
+"ui.selection"       = { fg = "background", bg = "foreground" }
 
 "string"             = { fg = "brown" }
 "constant.numeric"   = { fg = "brown" }
@@ -44,6 +45,7 @@ dark_grey  = "#191919"
 yellow     = "#f2e0c0"
 brown      = "#ac7151"
 pink       = "#fdc0ce"
+green      = "#51ac71"
 
 # diagnostic
 error      = "#ce4141"
