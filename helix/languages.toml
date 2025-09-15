@@ -1,4 +1,12 @@
 [[language]]
+name = "python"
+auto-format = true
+language-servers = ["jedi-language-server"]
+
+[language-server.jedi-language-server]
+command = "./.venv/bin/jedi-language-server"
+
+[[language]]
 name = "typescript"
 auto-format = true
 language-servers = ["typescript-language-server"]
