@@ -120,7 +120,8 @@ alias dri='docker image rm $(docker image ls --all --quiet)'
 # Python
 # --------------------
 
-alias pyv="python -m venv .venv"
+alias vpy--init="python -m venv .venv"
+alias vpy--activate="source ./.venv/bin/activate"
 alias vpy=".venv/bin/python"
 alias vpip=".venv/bin/pip"
 
