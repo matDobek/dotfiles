@@ -26,3 +26,6 @@ vim.opt.swapfile = false      -- disable swap files
 vim.opt.backup = false        -- disable backup files
 vim.opt.undofile = true       -- keep history after exiting file
 vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir" -- where to store undo files
+
+vim.opt.writeany = true
+vim.opt.confirm = true

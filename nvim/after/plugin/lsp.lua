@@ -2,116 +2,39 @@
 -- -- MASON
 -- ----------------------------
 
+local lspconfig = require("lspconfig")
+
 require("mason").setup()
 require("mason-lspconfig").setup {
   ensure_installed = {
-    --
-    -- This plugin uses lspconfig server names, not mason ones
-    -- ref: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-    --
-    'marksman', -- markdown
-    'lua_ls',
-    'sqlls',
-    'bashls',
-
-    'ruby_lsp',
-    'pyright',
-    'elixirls',
-    'gopls',
-    'rust_analyzer',
-
-    'ts_ls',
-    'svelte',
-    'cssls',
+    'marksman', 'lua_ls', 'sqlls', 'bashls', 'ruby_lsp',
+    'jedi_language_server', 'elixirls', 'gopls', 'rust_analyzer',
+    'ts_ls', 'svelte', 'cssls',
+  },
+  handlers = {
+    function(server)
+      lspconfig[server].setup({})
+    end,
   },
 }
 
--- ----------------------------
--- -- Debugger
--- ----------------------------
-
--- require("mason-nvim-dap").setup({
---     ensure_installed = { "delve" }
--- })
--- -- require('dap-go').setup()
--- require("dapui").setup()
--- require("nvim-dap-virtual-text").setup()
---
--- local dap = require('dap')
--- -- ref https://github.com/mfussenegger/nvim-dap/wiki/Debug-Adapter-installation#go-using-delve-directly
--- dap.adapters.delve = {
---   type = 'server',
---   port = '${port}',
---   executable = {
---     command = 'dlv',
---     args = {'dap', '-l', '127.0.0.1:${port}'},
---   }
--- }
---
--- dap.configurations.go = {
---   {
---     type = "delve",
---     name = "Debug",
---     request = "launch",
---     program = "${file}"
---   },
---   {
---     type = "delve",
---     name = "Debug test",
---     request = "launch",
---     mode = "test",
---     program = "${file}"
---   },
---   -- works with go.mod packages and sub packages
---   {
---     type = "delve",
---     name = "Debug test (go.mod)",
---     request = "launch",
---     mode = "test",
---     program = "./${relativeFileDirname}"
---   }
--- }
---
--- -- require("neodev").setup({
--- --   library = { plugins = { "neotest", "nvim-dap-ui" }, types = true },
--- -- })
---
--- -- open/close dapui on entering/exiting debugging
--- local dapui = require("dapui")
--- dap.listeners.after.event_initialized["dapui_config"] = function()
---   dapui.open()
--- end
--- dap.listeners.before.event_terminated["dapui_config"] = function()
---   dapui.close()
--- end
--- dap.listeners.before.event_exited["dapui_config"] = function()
---   dapui.close()
--- end
---
--- vim.keymap.set('n', '<leader>db', function() require('dap').toggle_breakpoint() end) -- (b)reakpoint
--- vim.keymap.set('n', '<leader>ds', function() require('dap').continue() end)          -- (s)tart
--- vim.keymap.set('n', '<leader>dc', function() require('dap').continue() end)          -- (c)ontinue
--- vim.keymap.set('n', '<leader>dd', function() require('dap').step_over() end)         --
--- vim.keymap.set('n', '<leader>df', function() require('dap').step_into() end)
--- vim.keymap.set('n', '<leader>dg', function() require('dap').step_out() end)
--- -- vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint() end)
--- -- vim.keymap.set('n', '<Leader>lp', function() require('dap').set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
--- vim.keymap.set('n', '<Leader>dr', function() require('dap').repl.open() end)
--- vim.keymap.set('n', '<Leader>dl', function() require('dap').run_last() end)
--- vim.keymap.set({'n', 'v'}, '<Leader>duh', function()
---   require('dap.ui.widgets').hover()
--- end)
--- vim.keymap.set({'n', 'v'}, '<Leader>dup', function()
---   require('dap.ui.widgets').preview()
--- end)
--- vim.keymap.set('n', '<Leader>duf', function()
---   local widgets = require('dap.ui.widgets')
---   widgets.centered_float(widgets.frames)
--- end)
--- vim.keymap.set('n', '<Leader>dus', function()
---   local widgets = require('dap.ui.widgets')
---   widgets.centered_float(widgets.scopes)
--- end)
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+require("lspconfig").lua_ls.setup {
+  capabilities = capabilities,
+  settings = {
+    Lua = {
+      diagnostics = { globals = {'vim'} } -- prevent "global 'vim' undefined" warning
+    }
+  }
+}
+require("lspconfig").bashls.setup {
+  capabilities = capabilities,
+  settings = {
+    bashIde = {
+      globPattern = "*@(.sh|.inc|.bash|.command)"
+    }
+  }
+}
 
 -- ----------------------------
 -- -- TREESITTER
@@ -310,40 +233,3 @@ cmp.setup.cmdline(':', {
       { name = 'cmdline' }
     })
 })
-
---
--- Set configuration for specific filetype.
---
-
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
-require("lspconfig").lua_ls.setup {
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      diagnostics = { globals = {'vim'} } -- prevent "global 'vim' undefined" warning
-    }
-  }
-}
-
-require("lspconfig").bashls.setup {
-  capabilities = capabilities,
-  settings = {
-    bashIde = {
-      globPattern = "*@(.sh|.inc|.bash|.command)"
-    }
-  }
-}
-
-require("lspconfig").marksman.setup { capabilities = capabilities }
-require("lspconfig").sqlls.setup { capabilities = capabilities }
-
-require("lspconfig").ruby_lsp.setup { capabilities = capabilities }
-require("lspconfig").pyright.setup { capabilities = capabilities }
-require("lspconfig").elixirls.setup { capabilities = capabilities }
-require("lspconfig").gopls.setup { capabilities = capabilities }
-require("lspconfig").rust_analyzer.setup { capabilities = capabilities }
-
-require'lspconfig'.ts_ls.setup{ capabilities = capabilities }
-require("lspconfig").svelte.setup { capabilities = capabilities }
-require("lspconfig").cssls.setup { capabilities = capabilities }
