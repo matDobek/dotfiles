@@ -101,11 +101,7 @@ alias mr="make run"
 alias tmux='TERM=screen-256color-bce tmux'
 
 alias tmux--dot='tmux a -t "dot" || tmux new-session -s "dot" "tmux source-file ~/.tmux_sessions/dotfiles"'
-alias tmux--gov='tmux a -t "gov" || tmux new-session -s "gov" "tmux source-file ~/.tmux_sessions/gov"'
-
-alias tmux--wai='tmux a -t "wrk_ai" || tmux new-session -s "wrk_ai" "tmux source-file ~/.tmux_sessions/wrk_ai"'
-alias tmux--wbck='tmux a -t "wrk_bck" || tmux new-session -s "wrk_bck" "tmux source-file ~/.tmux_sessions/wrk_bck"'
-alias tmux--wfro='tmux a -t "wrk_fro" || tmux new-session -s "wrk_fro" "tmux source-file ~/.tmux_sessions/wrk_fro"'
+alias tmux--wrk='tmux a -t "wrk" || tmux new-session -s "wrk" "tmux source-file ~/.tmux_sessions/wrk"'
 
 alias tmux--reorder='tmux move-window -r'
 
