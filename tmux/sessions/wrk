@@ -53,7 +53,7 @@ new-window
 rename-window 'additional'
 send-keys 'cd /home/cr0xd/main/friday/tinkering/visual_novel/frontend' C-m
 send-keys 'open http://localhost:5173/' C-m
-send-keys 'open http://localhost:4000/' C-m
+send-keys 'open http://localhost:4000/dev/dashboard/home' C-m
 send-keys 'tmux--reorder' C-m
 send-keys 'clear' C-m
 
