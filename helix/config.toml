@@ -2,15 +2,22 @@ theme = "duck"
 
 [editor]
 true-color = true
-line-number = "relative"
-rulers = [90]
+auto-pairs = false
+smart-tab.enable = false
 trim-final-newlines = true
 trim-trailing-whitespace = true
+
+line-number = "relative"
+rulers = [90]
 gutters = ["diagnostics", "line-numbers", "spacer"]
-auto-pairs = false
 
 [editor.inline-diagnostics]
 cursor-line = "hint"
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "block"
 
 # [editor.soft-wrap]
 # enable = true
