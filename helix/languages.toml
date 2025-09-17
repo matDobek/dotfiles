@@ -1,3 +1,16 @@
+# [language-server.expert]
+# command = "/home/cr0xd/.local/bin/expert"
+
+[[language]]
+name = "elixir"
+language-servers = ["elixir-ls"]
+# language-servers = ["expert"]
+
+[[language]]
+name = "heex"
+language-servers = ["elixir-ls"]
+# language-servers = ["expert"]
+
 [[language]]
 name = "python"
 auto-format = true
