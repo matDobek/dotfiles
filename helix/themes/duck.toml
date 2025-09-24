@@ -1,3 +1,31 @@
+# ----------
+#
+# Ref: https://docs.helix-editor.com/themes.html
+#
+# ----------
+#
+# Modifiers
+#   bold
+#   dim
+#   italic
+#   underlined
+#   slow_blink
+#   rapid_blink
+#   reversed
+#   hidden
+#   crossed_out
+#
+# ----------
+#
+# Underline style
+#   line
+#   curl
+#   dashed
+#   dotted
+#   double_line
+#
+# ----------
+
 "ui.background"              = { bg = "background" }
 "ui.text"                    = { fg = "foreground" }
 "ui.cursor"                  = { fg = "background", bg = "green" }
@@ -15,8 +43,8 @@
 "punctuation"        = { fg = "light_grey" }
 "operator"           = { fg = "light_grey" }
 
-"ui.linenr"          = { fg = "light_grey" }
-"ui.linenr.selected" = { fg = "light_grey", modifiers = ["bold"] }
+"ui.linenr"          = { fg = "light_grey", modifiers = ["dim"] }
+"ui.linenr.selected" = { fg = "light_grey", modifiers = ["dim", "bold"] }
 
 "ui.virtual.ruler"   = { bg = "dark_grey" }
 
@@ -31,17 +59,21 @@
 "diagnostic.hint"      = { fg = "foreground", bg = "background", underline = { style = "curl", color = "hint" } }
 
 # markdown
-"markup.link.url" = { modifiers = ["underlined"] }
-"markup.quote"    = { fg = "brown" }
-"markup.raw"      = { fg = "light_grey" }
+"markup.link"            = { modifiers = ["dim"] }
+"markup.quote"           = { modifiers = ["dim"] }
+"markup.heading"         = { fg = "brown" }
+"markup.heading.marker"  = { fg = "light_grey" }
+"markup.raw"             = { fg = "light_grey" }
+"markup.list"            = { fg = "light_grey" }
 
 "markup.normal.completion" = { fg = "foreground"}
-"markup.normal.hover" = { fg = "brown"}
+"markup.normal.hover"      = { fg = "brown"}
 
 [palette]
 
 background = "#161616"
-foreground = "#f2e0c0"
+foreground = "#d9c9ac"   # dimmed
+# foreground = "#f2e0c0" # bright
 
 light_grey = "#666666"
 dark_grey  = "#191919"
