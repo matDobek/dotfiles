@@ -4,12 +4,16 @@
 
 new-window
 rename-window 'proc'
-send-keys 'cd /home/cr0xd/main/friday/tinkering/visual_novel/frontend' C-m
-send-keys 'npm run dev' C-m
+send-keys 'cd /home/cr0xd/main/friday/tinkering/visual_novel/infra' C-m
+send-keys 'k9s' C-m
 
 split-window -v
-send-keys 'cd /home/cr0xd/main/friday/tinkering/visual_novel/backend' C-m
-send-keys 'mix phx.server' C-m
+send-keys 'cd /home/cr0xd/main/friday/tinkering/visual_novel/infra' C-m
+send-keys 'git status' C-m
+
+split-window -h
+send-keys 'cd /home/cr0xd/main/friday/tinkering/visual_novel/infra' C-m
+send-keys 'make start' C-m
 
 #--------------------
 # frontend
@@ -51,9 +55,9 @@ send-keys 'git status' C-m
 
 new-window
 rename-window 'additional'
-send-keys 'cd /home/cr0xd/main/friday/tinkering/visual_novel/frontend' C-m
-send-keys 'open http://localhost:5173/' C-m
-send-keys 'open http://localhost:4000/dev/dashboard/home' C-m
+send-keys 'cd /home/cr0xd/main/friday/tinkering/visual_novel/' C-m
+send-keys 'open http://localhost:8000/' C-m
+# send-keys 'open http://localhost:4000/dev/dashboard/home' C-m
 send-keys 'tmux--reorder' C-m
 send-keys 'clear' C-m
 
