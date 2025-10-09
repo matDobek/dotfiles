@@ -177,8 +177,18 @@ alias gcop="git ls-files -m | fzf | pbcopy"
 # --------------------
 # Mouse
 # --------------------
+
 alias friday--mouse--get="ratbagctl 0 dpi get"
 alias friday--mouse--set="ratbagctl 0 dpi set 1100 && ratbagctl 0 dpi set 1200" # bug need to apply twice
+
+# --------------------
+# MCP
+# --------------------
+alias friday--mcp-chrome="/usr/bin/google-chrome-canary \
+  --remote-debugging-port=9222 \
+  --user-data-dir="$HOME/.cache/chrome-devtools-mcp/manual" \
+  --no-first-run --no-default-browser-check
+"
 
 # --------------------
 # System
