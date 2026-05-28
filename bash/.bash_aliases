@@ -38,6 +38,7 @@ alias reload--eww='eww close-all && eww reload && eww open dock && eww open cont
 alias top='top -o cpu'
 alias topx='bashtop'
 alias vim='nvim'
+alias emacs='emacs -nw'
 alias hx='helix'
 alias gpg='LANG=en gpg'
 

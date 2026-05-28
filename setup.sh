@@ -125,6 +125,20 @@ function tmux() {
 }
 
 #================
+# emacs
+#================
+
+function emacs() {
+  rm -rf ~/.config/emacs
+  mkdir -p ~/.config/emacs
+
+  ln -sf $dotfiles_dir/emacs/early-init.el ~/.config/emacs/
+  ln -sf $dotfiles_dir/emacs/init.el ~/.config/emacs/
+  ln -sf $dotfiles_dir/emacs/lisp ~/.config/emacs/
+  ln -sf $dotfiles_dir/emacs/themes ~/.config/emacs/
+}
+
+#================
 # nvim
 #================
 
@@ -194,6 +208,7 @@ gpg
 
 tmux
 nvim
+emacs
 helix
 
 ruby
