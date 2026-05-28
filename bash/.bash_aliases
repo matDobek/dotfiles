@@ -80,6 +80,13 @@ alias friday--sound--gta='( cvlc --play-and-exit /home/cr0xd/main/friday/dotfile
 alias nice--json='python -m json.tool'
 
 # --------------------
+# AI
+# --------------------
+
+alias di='dirac --yolo --subagents --plan --provider https://router.requesty.ai/v1 --model deepseek/deepseek-v4-flash'
+alias oc='opencode --model requesty/deepseek/deepseek-v4-flash'
+
+# --------------------
 # LaTeX
 # --------------------
 

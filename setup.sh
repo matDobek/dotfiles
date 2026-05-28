@@ -175,7 +175,6 @@ function gpg() {
 #================
 
 
-
 hyprland
 waybar
 

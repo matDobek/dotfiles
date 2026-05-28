@@ -22,14 +22,25 @@ command = "./.venv/bin/jedi-language-server"
 [[language]]
 name = "typescript"
 auto-format = true
-language-servers = ["typescript-language-server"]
+language-servers = [ { name = "eslint", only-features = ["format"] }, "typescript-language-server"]
 
 [[language]]
 name = "tsx"
 auto-format = true
-language-servers = ["typescript-language-server"]
+language-servers = [ { name = "eslint", only-features = ["format"] }, "typescript-language-server"]
+
+[language-server.eslint]
+command = "vscode-eslint-language-server"
+args = ["--stdio"]
+
+[language-server.eslint.config]
+validate = "on"
 
 [[language]]
 name = "css"
 language-servers = [ "vscode-css-language-server"]
+auto-format = true
+
+[[language]]
+name = "nginx"
 auto-format = true

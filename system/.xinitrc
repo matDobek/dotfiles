@@ -2,3 +2,5 @@
 
 xmonad --recompile
 xmonad
+
+#exec i3

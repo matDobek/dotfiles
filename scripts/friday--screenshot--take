@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # X11
-# maim --select --hidecursor --nokeyboard --nodecorations=2 | xclip -selection clipboard -t image/png -i
+maim --select --hidecursor --nokeyboard --nodecorations=2 | xclip -selection clipboard -t image/png -i
 
 # hyprland
-hyprshot -m region --clipboard-only
+# hyprshot -m region --clipboard-only

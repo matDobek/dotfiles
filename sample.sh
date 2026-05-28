@@ -1,9 +1,14 @@
 #!/usr/bin/env bash
 
+# xev | grep button
+#
+# FOR W/E reason when I set button 3 it actually sets button 2
+# ratbagctl logitech-g600 button 8 action set button 3
+
 ratbagctl "Logitech Gaming Mouse G600" button 8 action set macro 'KEY_F1'
 ratbagctl "Logitech Gaming Mouse G600" button 9 action set macro 'KEY_F2'
 ratbagctl "Logitech Gaming Mouse G600" button 10 action set macro 'KEY_F3'
-ratbagctl "Logitech Gaming Mouse G600" button 11 action set macro 'KEY_F4'
+ratbagctl "Logitech Gaming Mouse G600" button 11 action set macro 'KEY_HOME'
 ratbagctl "Logitech Gaming Mouse G600" button 12 action set macro 'KEY_F5'
 ratbagctl "Logitech Gaming Mouse G600" button 13 action set macro 'KEY_F6'
 ratbagctl "Logitech Gaming Mouse G600" button 14 action set macro 'KEY_F7'
