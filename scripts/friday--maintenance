@@ -1,0 +1,99 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+function decho() {
+  echo
+  echo "---------------"
+  echo "$1"
+  echo "---------------"
+}
+
+function confirm() {
+  read -r -p "$1 [y/N] " reply
+  [[ "$reply" =~ ^[Yy]$ ]]
+}
+
+####################
+# verify
+####################
+
+if (( $(id -u) == 0 )); then
+  echo "--- Run as user, not root (script uses sudo internally)."
+  exit 1
+fi
+
+####################
+# 1. refresh mirrors
+####################
+
+decho "Refreshing mirrorlist (reflector)"
+sudo reflector @/etc/xdg/reflector/reflector.conf
+
+####################
+# 2. upgrade system
+####################
+
+decho "Upgrading system"
+sudo pacman -Syu --noconfirm
+
+####################
+# 3. trim package cache
+####################
+
+decho "Trimming package cache"
+sudo paccache -rk2     # keep last 2 versions of installed packages
+sudo paccache -ruk0    # drop all cache for uninstalled packages
+
+####################
+# 4. paru (AUR)
+####################
+
+decho "Upgrading AUR packages"
+paru -Sua --noconfirm
+
+decho "Cleaning AUR build cache"
+paru -c --noconfirm
+
+####################
+# 5. orphan packages
+####################
+
+decho "Checking for orphan packages"
+orphans=$(pacman -Qtdq 2>/dev/null || true)
+
+if [[ -z "$orphans" ]]; then
+  echo "No orphans."
+else
+  echo "$orphans"
+  if confirm "Remove the above orphans?"; then
+    sudo pacman -Rns $orphans
+  fi
+fi
+
+####################
+# 6. .pacnew / .pacsave files
+####################
+
+decho "Checking for .pacnew / .pacsave files"
+pacnews=$(sudo find /etc -name '*.pacnew' -o -name '*.pacsave' 2>/dev/null || true)
+
+if [[ -z "$pacnews" ]]; then
+  echo "None."
+else
+  echo "$pacnews"
+  echo
+  echo "Review and merge these manually (vimdiff / pacdiff)."
+fi
+
+####################
+# 7. health checks
+####################
+
+decho "Failed systemd units"
+systemctl --failed --no-legend || true
+
+decho "Boot partition usage"
+df -h /boot | tail -1
+
+decho "Done"

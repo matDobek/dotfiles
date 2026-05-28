@@ -3,6 +3,32 @@
 partition_boot=/dev/nvme0n1p1
 
 echo "===================="
+echo "Configure Arch Linux :: pacman"
+echo "===================="
+
+sed -i 's|^#ParallelDownloads.*|ParallelDownloads = 5|' /etc/pacman.conf
+sed -i 's|^#Color$|Color|' /etc/pacman.conf
+
+pacman -Sy --noconfirm reflector
+reflector --country Poland,Germany --latest 20 --sort rate --save /etc/pacman.d/mirrorlist
+pacman -Syy
+
+# Recurring mirror refresh — reflector.timer reads /etc/xdg/reflector/reflector.conf.
+# Override the upstream defaults to match how we run it in this script.
+cat > /etc/xdg/reflector/reflector.conf <<'EOF'
+--save /etc/pacman.d/mirrorlist
+--protocol https
+--country Poland,Germany
+--latest 20
+--sort rate
+EOF
+systemctl enable reflector.timer
+
+# Package cache cleanup — keep last 3 versions of each installed package.
+pacman -S --noconfirm pacman-contrib
+systemctl enable paccache.timer
+
+echo "===================="
 echo "Configure Arch Linux :: timezone && locales"
 echo "===================="
 ln -sf /usr/share/zoneinfo/Europe/Warsaw /etc/localtime
@@ -42,7 +68,27 @@ chown -R cr0xd: /home/cr0xd
 usermod -aG wheel cr0xd
 visudo
 
+systemctl enable systemd-resolved
 systemctl enable NetworkManager
+
+# Prefer IPv4 over IPv6 in getaddrinfo result ordering. This ISP's IPv6 path
+# beyond the gateway is broken, so apps that try v6 first hang.
+sed -i 's|^#precedence ::ffff:0:0/96  100|precedence ::ffff:0:0/96  100|' /etc/gai.conf
+
+echo "===================="
+echo "Configure Arch Linux :: performance && services"
+echo "===================="
+
+# CPU governor — default is powersave; pin to performance on this desktop.
+pacman -S --noconfirm cpupower
+echo 'governor="performance"' > /etc/default/cpupower
+systemctl enable cpupower
+
+# Weekly SSD TRIM.
+systemctl enable fstrim.timer
+
+# Cap journald disk usage — default lets it grow to ~10% of fs.
+sed -i 's|^#SystemMaxUse=.*|SystemMaxUse=500M|' /etc/systemd/journald.conf
 
 echo "===================="
 echo "Configure Arch Linux :: GRUB bootloader"
