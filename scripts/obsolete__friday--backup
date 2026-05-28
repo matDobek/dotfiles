@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+####################
+# vars
+####################
+
+src=/home/cr0xd/main
+dest_local=/home/cr0xd/main_backup.tar.gz
+
+src_paths=(
+  "/home/cr0xd/main/"
+  "/home/cr0xd/.ssh/"
+  "/home/cr0xd/art/ai/shared/workflows/"
+)
+
+dest_paths=(
+  "/media/disk/"
+  "/media/usb/"
+)
+
+to_exclude=(
+  # js
+  "node_modules/"
+
+  # rust
+  "target/"
+  "debug/"
+
+  # elixir
+  "_build/"
+  ".elixir_ls/"
+  "deps/"
+
+  # python
+  "__pycache__/"
+)
+
+exclude_args=()
+for item in "${to_exclude[@]}"; do
+  exclude_args+=(--exclude="${item}")
+done
+
+####################
+# verify
+####################
+
+# Check if root
+uid=$(id -u)
+if (( uid != 0 )); then
+  echo "--- Skipping - requires root privileges."
+  exit
+fi
+
+if [[ ! -e /dev/sda ]]; then
+  echo "--- Skipping - Hard Drive not present."
+  exit
+fi
+
+if [[ ! -e /dev/disk/by-label/backup ]]; then
+  echo "--- Skipping - USB not present."
+  exit
+fi
+
+####################
+# run
+####################
+
+# echo
+# echo "=== Backup to ${dest_local}"
+# tar -c -f - ${src} -P \
+#   | pv -s $(du -sb ${src} | awk '{print $1}') \
+#   | gzip > ${dest_local}
+
+sudo mount /dev/sda /media/disk
+sudo mount /dev/disk/by-label/backup /media/usb
+
+for dest_dir in "${dest_paths[@]}"; do
+  echo
+  echo "=== Backup to ${dest_dir}"
+
+  for src in "${src_paths[@]}"; do
+    echo ${src}
+
+    IFS='/' read -ra path <<< ${src}
+    dest="${dest_dir}${path[-1]}/"
+
+    size=$(rsync -av --delete --delete-excluded --dry-run ${exclude_args[@]} ${src} ${dest} | wc -l)
+    rsync -av --delete --delete-excluded ${exclude_args[@]} ${src} ${dest} | pv -l -s ${size} > /dev/null
+  done
+done
+
+echo
+echo "=== Cleanup"
+sudo umount /media/disk
+sudo umount /media/usb

@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# Per-boot user-session setup. Run once after logging in.
+# Anything that doesn't survive a reboot lives here.
+
+function step() {
+  echo
+  echo "==> $1"
+}
+
+step "Load SSH key into ssh-agent (needed for git pushes, backups to Hetzner, etc.)"
+ssh-add ~/.ssh/id_ed25519

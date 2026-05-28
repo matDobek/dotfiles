@@ -3,95 +3,158 @@
 set -euo pipefail
 
 ####################
-# vars
+# config
 ####################
 
-src=/home/cr0xd/main
-dest_local=/home/cr0xd/main_backup.tar.gz
-
-src_paths=(
-  "/home/cr0xd/main/"
-  "/home/cr0xd/.ssh/"
-  "/home/cr0xd/art/ai/shared/workflows/"
+sources=(
+  "/home/cr0xd/main"
+  "/home/cr0xd/.ssh"
 )
 
-dest_paths=(
-  "/media/disk/"
-  "/media/usb/"
-)
-
-to_exclude=(
+excludes=(
   # js
-  "node_modules/"
+  "node_modules"
 
   # rust
-  "target/"
-  "debug/"
+  "target"
+  "debug"
 
   # elixir
-  "_build/"
-  ".elixir_ls/"
-  "deps/"
+  "_build"
+  ".elixir_ls"
+  "deps"
 
   # python
-  "__pycache__/"
+  "__pycache__"
+
+  # general
+  ".cache"
+  "*.tmp"
 )
 
-exclude_args=()
-for item in "${to_exclude[@]}"; do
-  exclude_args+=(--exclude="${item}")
-done
+hetzner_retention=(
+  --keep-daily 7
+  --keep-weekly 4
+  --keep-monthly 12
+  --keep-yearly 3
+)
+
+# USB is small (14 GB) - keep only the latest snapshot.
+usb_retention=(
+  --keep-last 1
+)
+
+usb_label="backup"
+usb_mount="/media/usb"
+usb_repo_path="restic/friday"
+
+# Hetzner connection details live in ~/.ssh/config under the "backup" host.
+hetzner_ssh_host="backup"
+hetzner_repo_path="restic/friday"
+
+####################
+# helpers
+####################
+
+function decho() {
+  echo
+  echo "---------------"
+  echo "$1"
+  echo "---------------"
+}
+
+function confirm() {
+  read -r -p "$1 [y/N] " reply
+  [[ "$reply" =~ ^[Yy]$ ]]
+}
 
 ####################
 # verify
 ####################
 
-# Check if root
-uid=$(id -u)
-if (( uid != 0 )); then
-  echo "--- Skipping - requires root privileges."
-  exit
+if (( $(id -u) == 0 )); then
+  echo "--- Run as user, not root (script uses sudo only when mounting)."
+  exit 1
 fi
 
-if [[ ! -e /dev/sda ]]; then
-  echo "--- Skipping - Hard Drive not present."
-  exit
-fi
+command -v restic >/dev/null || { echo "restic not installed."; exit 1; }
 
-if [[ ! -e /dev/disk/by-label/backup ]]; then
-  echo "--- Skipping - USB not present."
-  exit
-fi
-
-####################
-# run
-####################
-
-# echo
-# echo "=== Backup to ${dest_local}"
-# tar -c -f - ${src} -P \
-#   | pv -s $(du -sb ${src} | awk '{print $1}') \
-#   | gzip > ${dest_local}
-
-sudo mount /dev/sda /media/disk
-sudo mount /dev/disk/by-label/backup /media/usb
-
-for dest_dir in "${dest_paths[@]}"; do
-  echo
-  echo "=== Backup to ${dest_dir}"
-
-  for src in "${src_paths[@]}"; do
-    echo ${src}
-
-    IFS='/' read -ra path <<< ${src}
-    dest="${dest_dir}${path[-1]}/"
-
-    size=$(rsync -av --delete --delete-excluded --dry-run ${exclude_args[@]} ${src} ${dest} | wc -l)
-    rsync -av --delete --delete-excluded ${exclude_args[@]} ${src} ${dest} | pv -l -s ${size} > /dev/null
-  done
+for src in "${sources[@]}"; do
+  if [[ ! -e "$src" ]]; then
+    echo "Source missing: $src"
+    exit 1
+  fi
 done
 
+####################
+# restic passphrase (prompt once, share with both repos for this run only)
+####################
+
+read -rsp "Restic passphrase: " RESTIC_PASSWORD
 echo
-echo "=== Cleanup"
-sudo umount /media/disk
-sudo umount /media/usb
+export RESTIC_PASSWORD
+
+####################
+# exclude args
+####################
+
+exclude_args=()
+for item in "${excludes[@]}"; do
+  exclude_args+=(--exclude "$item")
+done
+
+####################
+# backup function
+####################
+
+function backup_to_repo() {
+  local label="$1"
+  local repo="$2"
+  local -n retention_ref="$3"
+
+  decho "Backup to ${label}"
+  echo "Repo: ${repo}"
+
+  restic -r "$repo" backup \
+    --verbose \
+    --one-file-system \
+    "${exclude_args[@]}" \
+    "${sources[@]}"
+
+  decho "Forget + prune at ${label}"
+  restic -r "$repo" forget "${retention_ref[@]}" --prune
+
+  decho "Quick integrity check at ${label}"
+  restic -r "$repo" check
+}
+
+####################
+# USB
+####################
+
+usb_available=0
+if [[ -e "/dev/disk/by-label/${usb_label}" ]]; then
+  if ! mountpoint -q "$usb_mount"; then
+    sudo mkdir -p "$usb_mount"
+    sudo mount "/dev/disk/by-label/${usb_label}" "$usb_mount"
+  fi
+  usb_available=1
+  trap 'mountpoint -q "'"$usb_mount"'" && sudo umount "'"$usb_mount"'" || true' EXIT
+fi
+
+if (( usb_available )); then
+  backup_to_repo "USB" "${usb_mount}/${usb_repo_path}" usb_retention
+else
+  echo
+  echo "USB not present (label: ${usb_label}). Skipping USB backup."
+fi
+
+####################
+# Hetzner
+####################
+
+hetzner_repo="sftp:${hetzner_ssh_host}:${hetzner_repo_path}"
+
+backup_to_repo "Hetzner" "$hetzner_repo" hetzner_retention
+
+decho "Done"

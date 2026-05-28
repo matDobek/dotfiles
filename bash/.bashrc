@@ -148,23 +148,6 @@ PATH=$HOME/.local/bin:$PATH
 export PATH=$PATH
 
 # --------------------
-# 3rd porty scripts
-# --------------------
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# --------------------
-# OS Specyfic :: Arch
-# --------------------
-
-# asdf
-# . /opt/asdf-vm/asdf.sh
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
-
-# autojump
-[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
-
-# --------------------
 # Erlang
 # --------------------
 export ERL_AFLAGS="-kernel shell_history enabled"
@@ -172,49 +155,7 @@ export ERL_AFLAGS="-kernel shell_history enabled"
 # --------------------
 # Rust
 # --------------------
-# source "$(asdf where rust)/env"
 source $HOME/.cargo/env
-
-# --------------------
-# OS Specyfic :: Mac
-# --------------------
-
-# autojump
-#[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
-
-# asdf
-#. /usr/local/opt/asdf/libexec/asdf.sh
-
-# --------------------
-# OS Specyfic :: Nix
-# --------------------
-
-# autojump
-# source "$(nix-store --query --references "$(which autojump)" | grep autojump)/share/autojump/autojump.bash"
-#
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/cr0xd/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/cr0xd/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/cr0xd/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/cr0xd/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-
-
-
-export DISPLAY=:0
-export XDG_SESSION_TYPE=x11
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/home/cr0xd/.lmstudio/bin"
 
 # --------------------
 # cuda
@@ -223,3 +164,23 @@ export CUDA_HOME=/opt/cuda
 export PATH=$CUDA_HOME/bin:$PATH
 export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 . "$HOME/.cargo/env"
+
+# --------------------
+# Additional
+# --------------------
+
+eval "$(/usr/bin/mise activate bash)"
+
+# autojump
+[[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+
+export DISPLAY=:0
+export XDG_SESSION_TYPE=x11
+
+# --------------------
+# ssh-agent (systemd user socket)
+# --------------------
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/home/cr0xd/.lmstudio/bin"

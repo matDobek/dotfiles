@@ -282,3 +282,16 @@ sudo pacman -S --noconfirm rapid-photo-downloader
 
 # obs
 sudo pacman -S obs-studio v4l2loopback-dkms v4l2loopback-utils ffmpeg
+
+
+
+
+
+###################
+### FixMe
+###################
+
+sudo pacman -S mise --noconfirm       # asdf replacement
+sudo pacman -S restic --noconfirm     # backups (see arch/restoration.md to restore)
+
+sudo pacman -S yazi # tree
