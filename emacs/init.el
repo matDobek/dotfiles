@@ -98,6 +98,7 @@
 (require 'my-treesit)
 (require 'my-formatting)
 (require 'my-git)
+(require 'my-modeline)
 
 (provide 'init)
 ;;; init.el ends here
